@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']. '/com.foo.makororeservas/serviciotecnico/utilidades/Conexion.class.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/com.foo.makororeservas/serviciotecnico/utilidades/Bitacora.class.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/com.contabilidad.prj/serviciotecnico/utilidades/Conexion.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/com.contabilidad.prj/serviciotecnico/utilidades/Bitacora.class.php';
 /**
  * Description of TransaccionBDclass
  * Clase para el manejo de las transacciones con la base de datos
