@@ -1,6 +1,5 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']. '/com.contabilidad.prj/serviciotecnico/utilidades/Conexion.class.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/com.contabilidad.prj/serviciotecnico/utilidades/Bitacora.class.php';
 /**
  * Description of TransaccionBDclass
  * Clase para el manejo de las transacciones con la base de datos
@@ -19,7 +18,6 @@ class TransaccionBDclass {
  */
     function __construct() {
         $this->conexion = new Conexionclass();
-        $this->bitacora = Bitacoraclass::getInstance();
     }
 
 /**
@@ -32,7 +30,6 @@ class TransaccionBDclass {
         $result = mysql_query($query,$link);
         if (!$result) {
             $mensaje = $query. '  '.mysql_error();
-            $this->bitacora->escribirMensajeBD($mensaje,1);
         }
         $this->conexion->cerrarConexion();
         return $result;
