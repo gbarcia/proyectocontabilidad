@@ -9,16 +9,32 @@ and open the template in the editor.
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <div align = "center"><h1>INSERCI&OACUTE;N&nbsp;DE&nbsp;PRODUCTOS</h1></div>
-      <form action = "insertarProducto.php" method = "post"
+    <div align = "center"><h1>INSERCI&Oacute;N&nbsp;DE&nbsp;PRODUCTOS</h1></div>
+      <form action = "registroCompraVenta.php" method = "post"
             target = "visualizacion">
-          <table>
+          <table align = "center">
               <tr>
                   <td align = "right">
-                      Nombre&nbsp;del&nbsp;producto
+                      Identificador&nbsp;del&nbsp;producto
                   </td>
                   <td align = "left">
-                      <input type = "text" name = "nombre">
+                      <input type = "text" name = "idProducto">
+                  </td>
+              </tr>
+              <tr>
+                  <td align = "right">
+                      Rif&nbsp;del&nbsp;proveedor
+                  </td>
+                  <td align = "left">
+                      <input type = "text" name = "rifProveedor">
+                  </td>
+              </tr>
+              <tr>
+                  <td align = "right">
+                      Fecha&nbsp;de&nbsp;la&nbsp;compra
+                  </td>
+                  <td align = "left">
+                      <input type = "text" name = "fecha">
                   </td>
               </tr>
               <tr>
@@ -30,10 +46,19 @@ and open the template in the editor.
                   </td>
               </tr>
               <tr>
+                  <td align = "right">
+                      Cantidad
+                  </td>
+                  <td align = "left">
+                      <input type = "text" name = "cantidad">
+                  </td>
+              </tr>
+              <tr>
                   <td align = "center" colspan = "2">
                       <input type = "submit" value = "Registrar compra">
                           &nbsp;&nbsp;
                       <input type = "reset" value = "Cancelar">
+                      <input type = "hidden" name = "tipo" value = "compra">
                   </td>
               </tr>
           </table>
