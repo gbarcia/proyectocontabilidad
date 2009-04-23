@@ -1,6 +1,9 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']. '/com.contabilidad.prj/serviciotecnico/utilidades/Conexion.class.php';
-/**
+//require_once $_SERVER['DOCUMENT_ROOT']. '/com.contabilidad.prj/serviciotecnico/utilidades/Conexion.class.php';
+
+include("../serviciotecnico/utilidades/Conexion.class.php");
+
+/*
  * Description of TransaccionBDclass
  * Clase para el manejo de las transacciones con la base de datos
  * @author gerardobarcia

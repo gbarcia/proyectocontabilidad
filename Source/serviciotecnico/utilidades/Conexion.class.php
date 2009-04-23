@@ -1,5 +1,8 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/com.contabilidad.prj/configuracion/ConfiguracionBD.class.php");
+//require_once($_SERVER['DOCUMENT_ROOT'] . "/com.contabilidad.prj/configuracion/ConfiguracionBD.class.php");
+
+require_once("../configuracion/ConfiguracionBD.class.php");
+
 /**
  * Description of Conexionclass
  *
