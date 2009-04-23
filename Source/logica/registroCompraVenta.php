@@ -11,6 +11,8 @@
     $cantidad = $_POST[cantidad];
     $tipo = $_POST[tipo];
 
+    echo $tipo;
+
     if ($tipo == "compra") {
         $compra = new Insercion($idProducto, $rif, $fecha, $costoUnitario, $cantidad);
 
