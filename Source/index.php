@@ -1,12 +1,1 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // probando subversion
-        ?>
-    </body>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Sistema EDUGER</title><style type="text/css"><!--.style5 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; }.style6 {	color: #FFFFFF;	font-family: Arial, Helvetica, sans-serif;	font-size: 10px;}--></style></head><body><table width="100%" border="0" cellspacing="0" cellpadding="0">  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td>&nbsp;</td>    <td colspan="2" bgcolor="#000033"><div align="center" class="style6">DATOS ACCESO</div></td>    <td>&nbsp;</td>  </tr>  <tr>    <td width="42%">&nbsp;</td>    <td width="8%" bgcolor="#CCCCCC"><div align="center"><span class="style5">Usuario:    </span></div></td>    <td width="20%" bgcolor="#CCCCCC"><input type="text" name="textfield" id="textfield" /></td>    <td width="30%">&nbsp;</td>  </tr>  <tr>    <td>&nbsp;</td>    <td bgcolor="#CCCCCC"><div align="center"><span class="style5">Clave:    </span></div></td>    <td bgcolor="#CCCCCC"><input type="text" name="textfield2" id="textfield2" /></td>    <td>&nbsp;</td>  </tr>  <tr>    <td>&nbsp;</td>    <td colspan="2" bgcolor="#CCCCCC"><div align="center">      <input name="button" type="submit" class="style5" id="button" value="Acceder" />    </div></td>    <td>&nbsp;</td>  </tr>  <tr>    <td colspan="4"><div align="center">      <div id="mensajeInicio"></div>    </div></td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr>  <tr>    <td colspan="4">&nbsp;</td>  </tr></table></body></html>
