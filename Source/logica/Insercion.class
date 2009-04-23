@@ -22,8 +22,8 @@
         }
 
         function realizarCompra($idProducto, $rifProveedor, $fecha, $costoUnitario, $cantidad) {
-            $query = "insert into compra ('PRODUCTO_id', 'PROVEEDOR_rif', 'fecha', 'costo_unitario', 'cantidad')
-                    values ('$idProducto', '$rifProveedor', '$fecha', '$costoUnitario', '$cantidad')";
+            $query = "INSERT INTO COMPRA (PRODUCTO_id, PROVEEDOR_rif, fecha, costo_unitario, cantidad)
+                    VALUES ($idProducto, '$rifProveedor', '$fecha', $costoUnitario, $cantidad)";
 
             $compra = new TransaccionBDclass();
 
@@ -32,7 +32,7 @@
 
         function realizarVenta($rifCliente, $idProducto, $fecha, $costoUnitario, $cantidad) {
             $query = "insert into venta (CLIENTE_rif, PRODUCTO_id, fecha, costo_unitario, cantidad)
-                         values ('$rifCliente', '$idProducto', '$fecha', $costoUnitario, $cantidad)";
+                         values ('$rifCliente', $idProducto, '$fecha', $costoUnitario, $cantidad)";
 
             $this->realizarTransaccion($query);
         }
