@@ -30,9 +30,27 @@ and open the template in the editor.
             <td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>
             <td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>
         </tr>
-    </table>
-  <?php
+    <?php
+        require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
 
-  ?>
+        class Inventario {
+
+            private $consultaCompras;
+            private $consultaVentas;
+
+            function __construct(){
+                $this->consultaCompras = "select * from compra order by fecha";
+                $this->consultaVentas = "select * from venta order by fecha";
+            }
+
+            function mostrarFicha(){
+                $compras = $this->realizarTransaccion($this->consultaCompras);
+                $ventas = $this->realizarTransaccion($this->consultaVentas);
+
+                echo $compras["costo_unitario"];
+            }
+        }
+    ?>
+    </table>
   </body>
 </html>

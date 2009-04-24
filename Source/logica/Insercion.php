@@ -34,7 +34,7 @@
 
         function realizarVenta($rifCliente, $idProducto, $fecha, $costoUnitario, $cantidad) {
             $castFecha = date("Y-M-j", (strtotime($fecha)+60*60*24*($OFFSET)));
-            
+
             $query = "insert into venta (CLIENTE_rif, PRODUCTO_id, fecha, costo_unitario, cantidad)
                          values ('$rifCliente', $idProducto, '$castFecha', $costoUnitario, $cantidad)";
 
@@ -44,4 +44,3 @@
         }
     }
 ?>
-
