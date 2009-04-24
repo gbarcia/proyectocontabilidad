@@ -22,10 +22,8 @@
         }
 
         function realizarCompra($idProducto, $rifProveedor, $fecha, $costoUnitario, $cantidad) {
-            $castFecha = date("Y-M-j", (strtotime($fecha)+60*60*24*($OFFSET)));
-
             $query = "insert into compra (PRODUCTO_id, PROVEEDOR_rif, fecha, costo_unitario, cantidad)
-                    values ($idProducto, '$rifProveedor', '$castFecha', $costoUnitario, $cantidad)";
+                    values ($idProducto, '$rifProveedor', '$fecha', $costoUnitario, $cantidad)";
 
             $compra = new TransaccionBDclass();
 
@@ -33,10 +31,8 @@
         }
 
         function realizarVenta($rifCliente, $idProducto, $fecha, $costoUnitario, $cantidad) {
-            $castFecha = date("Y-M-j", (strtotime($fecha)+60*60*24*($OFFSET)));
-
             $query = "insert into venta (CLIENTE_rif, PRODUCTO_id, fecha, costo_unitario, cantidad)
-                         values ('$rifCliente', $idProducto, '$castFecha', $costoUnitario, $cantidad)";
+                         values ('$rifCliente', $idProducto, '$fecha', $costoUnitario, $cantidad)";
 
             $venta = new TransaccionBDclass();
 

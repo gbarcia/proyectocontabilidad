@@ -39,15 +39,88 @@ and open the template in the editor.
             private $consultaVentas;
 
             function __construct(){
-                $this->consultaCompras = "select * from compra order by fecha";
-                $this->consultaVentas = "select * from venta order by fecha";
+                $this->consultaCompras = "select fecha, costo_unitario, cantidad from compra order by fecha";
+                $this->consultaVentas = "select fecha, costo_unitario, cantidad from venta order by fecha";
             }
 
             function mostrarFicha(){
-                $compras = $this->realizarTransaccion($this->consultaCompras);
-                $ventas = $this->realizarTransaccion($this->consultaVentas);
+                $transaccion = new TransaccionBDclass();
 
-                echo $compras["costo_unitario"];
+                $resultadoCompras = $transaccion->realizarTransaccion($this->consultaCompras);
+                $resultadoVentas = $transaccion->realizarTransaccion($this->consultaVentas);
+
+                $cantidadUltima = 1;
+                $costoUnitarioUltimo = 1;
+                $totalUltimo = 1;
+
+                while (($compras = mysql_fetch_array($resultadoCompras)) ||
+                            ($ventas = mysql_fetch_array($resultadoVentas))) {
+
+                    if (strtotime($compras["fecha"]) <= strtotime($ventas["fecha"])){
+                        
+                        /*
+                         * Colocando valores en ENTRADAS y EXISTENCIAS
+                         */
+
+                        printf("<tr align = 'center'>
+                                    <td>%s</td>
+                                    <td>compra</td>
+                                    <td>%d</td>
+                                    <td>%f</td>
+                                    <td>%f</td>
+                                    <td colspan = '3'></td>
+                                    <td>%d</td>
+                                    <td>%f</td>
+                                    <td>%f</td>
+                                </tr>",
+                            $compras["fecha"],
+                            $compras["cantidad"], $compras["costo_unitario"],
+                            $compras["cantidad"] * $compras["costo_unitario"],
+                            $cantidadUltima + $compras["cantidad"],
+                            ($totalUltimo + ($compras["cantidad"] * $compras["costo_unitario"]))/($cantidadUltima + $compras["cantidad"]),
+                            $totalUltimo + ($compras["cantidad"] * $compras["costo_unitario"]));
+
+                        /*
+                         * Actualizando útlimos valores del inventario
+                        */
+
+                        $costoUnitarioUltimo = ($totalUltimo + ($compras["cantidad"] * $compras["costo_unitario"]))/($cantidadUltima + $compras["cantidad"]);
+                        $cantidadUltima += $compras["cantidad"];
+                        $totalUltimo += $compras["cantidad"] * $compras["costo_unitario"];
+                    }
+                    
+                    elseif (strtotime($ventas["fecha"]) < strtotime($compras["fecha"])){
+
+                        /*
+                         * Colocando valores en SALIDAS y EXISTENCIAS
+                         */
+
+                        printf("<tr align = 'center'>
+                                    <td>%s</td>
+                                    <td>venta</td>
+                                    <td colspan = '3'></td>
+                                    <td>%d</td>
+                                    <td>%f</td>
+                                    <td>%f</td>
+                                    <td>%d</td>
+                                    <td>%f</td>
+                                    <td>%f</td>
+                                </tr>",
+                            $ventas["fecha"],
+                            $ventas["cantidad"], $costoUnitarioUltimo,
+                            $ventas["cantidad"] * $costoUnitarioUltimo,
+                            $cantidadUltima - $ventas["cantidad"],
+                            ($totalUltimo - ($ventas["cantidad"] * $costoUnitarioUltimo))/($cantidadUltima - $ventas["cantidad"]),
+                            $totalUltimo - ($ventas["cantidad"] * $costoUnitarioUltimo));
+
+                        /*
+                         * Actualizando útlimos valores del inventario
+                        */
+
+                        $cantidadUltima -= $ventas["cantidad"];
+                        $totalUltimo -= $compras["cantidad"] * $costoUnitarioUltimo;
+                    }
+                }
             }
         }
     ?>
