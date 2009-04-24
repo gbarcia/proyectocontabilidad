@@ -33,6 +33,7 @@ class TransaccionBDclass {
         $result = mysql_query($query,$link);
         if (!$result) {
             $mensaje = $query. '  '.mysql_error();
+            echo $mensaje;
         }
         $this->conexion->cerrarConexion();
         return $result;

@@ -2,7 +2,7 @@
     //require_once $_SERVER['DOCUMENT_ROOT']. '/com.contabilidad.prj/serviciotecnico/utilidades/TransaccionBD.class.php';
 
     require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
-    require_once("Insercion.class");
+    require_once("Insercion.php");
 
     $idProducto = $_POST[idProducto];
     $rif = $_POST[rif];
