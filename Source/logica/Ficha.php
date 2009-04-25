@@ -10,7 +10,7 @@ and open the template in the editor.
   </head>
   <body>
     <h1 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO</b></h1><br><br><br>
-    <table align = "center" border = "3">
+    <table align = "center" border = "2" cellpadding = "2" cellspacing = "2">
         <tr align = "center">
             <th><font size = "2" face = "Garamond, Comic Sans MS, Arial">FECHA</font></th>
             <th><font size = "2" face = "Garamond, Comic Sans MS, Arial">DESCRIPCI&Oacute;N</font></th>
@@ -32,6 +32,7 @@ and open the template in the editor.
         </tr>
     <?php
         require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
+        require_once("../serviciotecnico/utilidades/Conexion.class.php");
 
         class Inventario {
 
@@ -71,9 +72,9 @@ and open the template in the editor.
 
                 $transaccion = new TransaccionBDclass();
                 
-                $cantidad = 1;        //Aquí van
-                $costoUnitario= 1;   //los valores del
-                $total = 1;           //inventario inicial
+                $cantidad = 0;        //Aquí van
+                $costoUnitario = 0;   //los valores del
+                $total = 0;           //inventario inicial
 
                 $i = 0;
                 $j = 0;
@@ -87,22 +88,18 @@ and open the template in the editor.
                         
                         $fecha = $this->fechasCompras[$i];
 
-                        $consultaCompras = "select fecha, costo_unitario, cantidad from compra where fecha = $fecha";
+                        $consultaCompras = "select fecha, costo_unitario, cantidad from compra where fecha = '$fecha'";
 
                         $resultadoCompras = $transaccion->realizarTransaccion($consultaCompras);
-                        
+
                         /*
                          * Colocando valores en ENTRADAS y EXISTENCIAS
                          */
 
                         while ($compras = mysql_fetch_array($resultadoCompras)) {
 
-                            echo $compras["fecha"]."<br>";
-                            echo $compras["cantidad"]."<br>";
-                            echo $compras["costo_unitario"]."<br>";
-
-                           /* $cantidad += $compras["cantidad"];
                             $costoUnitario = ($total + ($compras["cantidad"] * $compras["costo_unitario"]))/($cantidad + $compras["cantidad"]);
+                            $cantidad += $compras["cantidad"];
                             $total += ($compras["cantidad"] * $compras["costo_unitario"]);
 
                             printf("<tr align = 'center'>
@@ -110,17 +107,18 @@ and open the template in the editor.
                                         <td>compra</td>
                                         <td>%d</td>
                                         <td>%f</td>
-                                        <td>%f</td>
+                                        <td>%d</td>
                                         <td colspan = '3'></td>
                                         <td>%d</td>
                                         <td>%f</td>
                                         <td>%d</td>
                                     </tr>",
+                                
                                 $compras["fecha"],
                                 $compras["cantidad"],
-                                round($compras["costo_unitario"] * 100)/100,
+                                round($compras["costo_unitario"]*100)/100,
                                 round($compras["cantidad"] * $compras["costo_unitario"]),
-                                $cantidad, round($costoUnitario * 100)/100, $total);*/
+                                $cantidad, round($costoUnitario*100)/100, round($total));
 
                             $i++;
 
@@ -142,7 +140,7 @@ and open the template in the editor.
                          * Colocando valores en SALIDAS y EXISTENCIAS
                          */
 
-                        /*while ($ventas = mysql_fetch_array($resultadoVentas)) {
+                        while ($ventas = mysql_fetch_array($resultadoVentas)) {
 
                             $cantidad -= $ventas["cantidad"];
                             $total -= ($ventas["cantidad"] * $costoUnitario);
@@ -153,22 +151,23 @@ and open the template in the editor.
                                         <td colspan = '3'></td>
                                         <td>%d</td>
                                         <td>%f</td>
-                                        <td>%f</td>
+                                        <td>%d</td>
                                         <td>%d</td>
                                         <td>%f</td>
                                         <td>%d</td>
                                     </tr>",
+
                                 $ventas["fecha"],
-                                $ventas["cantidad"], round($costoUnitario * 100)/100,
+                                $ventas["cantidad"], round($costoUnitario*100)/100,
                                 round($ventas["cantidad"] * $costoUnitario),
-                                $cantidad, round($costoUnitario * 100)/100, $total);*/
+                                $cantidad, round($costoUnitario*100)/100, round($total));
 
                             $j++;
 
                             if ($j >= count($this->fechasVentas)){
                                 $flagVentas = false;
                             }
-                       // }
+                        }
                     }
                 }
             }
