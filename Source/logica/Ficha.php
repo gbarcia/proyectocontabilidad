@@ -32,8 +32,7 @@ and open the template in the editor.
         </tr>
     <?php
         require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
-        require_once("../serviciotecnico/utilidades/Conexion.class.php");
-
+        
         class Inventario {
 
             private $consultaFechasCompras;
