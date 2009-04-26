@@ -348,10 +348,24 @@ function CambiarFormulario ($datos) {
 function procesarAsiento ($datos) {
     $objResponse = new xajaxResponse();
     if ($datos[tipo] == 0) {
-        print 'aca0';
+        //REGISTRAR COMPRA
+        $controlAsiento = new ManejadorAsiento();
+        $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
+        if ($datos[producto] == 1) $cuentaEgreso = 12;
+        else if ($datos[producto] == 2) $cuentaEgreso = 13;
+        $montoTotal = $datos[cantidad] * $datos[costo];
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, 0, $montoTotal, 'C');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaEgreso, $montoTotal,0, 'C');
     }
     else if ($datos[tipo] == 1) {
-        print 'aca1';
+        //REGISTRAR COMPRA
+        $controlAsiento = new ManejadorAsiento();
+        $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
+        if ($datos[producto] == 1) $cuentaIngreso = 10;
+        else if ($datos[producto] == 2) $cuentaIngreso = 11;
+        $montoTotal = $datos[cantidad] * $datos[costo];
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, $montoTotal,0 , 'V');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaIngreso,0,$montoTotal, 'V');
     }
     else if ($datos[tipo] == 2) {
         print 'aca2';

@@ -39,5 +39,20 @@ class ManejadorAsiento {
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
+
+      function agregarAsiento ($fecha) {
+        $resultado = false;
+        $query = "INSERT INTO ASIENTO VALUES (NULL,'".$fecha."')";
+        $resultado = $this->transaccion->realizarTransaccionInsertId($query);
+        return $resultado;
+    }
+
+    function agregarRegistro ($idAsiento, $numCuenta,$debe,$haber,$tipo) {
+        $resultado = false;
+        $query = "INSERT INTO REGISTRO VALUES ($idAsiento,$numCuenta,$debe,$haber,
+                  NULL,NULL,NULL,NULL,NULL,NULL,'".$tipo."')";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
 }
 ?>
