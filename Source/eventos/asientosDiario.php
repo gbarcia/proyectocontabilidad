@@ -37,6 +37,11 @@ function generarFormularioNuevaCompra () {
     <td>Costo Unitario:</td>
     <td><input name="costo" type="text" id="textfield3" size="20" /></td>
   </tr>
+<tr>
+      <td height="26" colspan="2"><div align="center">
+        <input name="button" type="button" id="button" value="REGISTRAR" onclick= "xajax_procesarAsiento(xajax.getFormValues(\'formControl\'))" />
+      </div></td>
+    </tr>
 </table>';
     $objResponse = new xajaxResponse();
     $objResponse->addAssign("control", "innerHTML", $formulario);
@@ -88,6 +93,11 @@ function CambiarFormulario ($datos) {
     <td>Costo Unitario:</td>
     <td><input name="costo" type="text" id="textfield3" size="20" /></td>
   </tr>
+<tr>
+      <td height="26" colspan="2"><div align="center">
+        <input name="button" type="button" id="button" value="REGISTRAR" onclick= "xajax_procesarAsiento(xajax.getFormValues(\'formControl\'))" />
+      </div></td>
+    </tr>
 </table>';
     }
     else if ($datos[tipoAsiento] == 1) {
@@ -124,6 +134,11 @@ function CambiarFormulario ($datos) {
     <td>Costo Unitario:</td>
     <td><input name="costo" type="text" id="textfield3" size="20" /></td>
   </tr>
+<tr>
+      <td height="26" colspan="2"><div align="center">
+        <input name="button" type="button" id="button" value="REGISTRAR" onclick= "xajax_procesarAsiento(xajax.getFormValues(\'formControl\'))" />
+      </div></td>
+    </tr>
 </table>';
     }
     else if ($datos[tipoAsiento] == 2) {
@@ -148,7 +163,7 @@ function CambiarFormulario ($datos) {
         <input type="text" name="fecha" id="f_date_c" readonly="1" size="15" /><img src="jscalendar/img.gif" id="f_trigger_c" style="cursor: pointer; border: 1px solid red;" title="Date selector"</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><input name="hiddenField" type="hidden" id="hiddenField" value="2" /></td>
+    <td><input name="tipo" type="hidden" id="tipo" value="2" /></td>
   </tr>
   <tr>
     <td colspan="8">&nbsp;</td>
@@ -311,6 +326,11 @@ function CambiarFormulario ($datos) {
   <tr>
     <td colspan="8">&nbsp;</td>
   </tr>
+<tr>
+      <td height="26" colspan="2"><div align="center">
+        <input name="button" type="button" id="button" value="REGISTRAR" onclick= "xajax_procesarAsiento(xajax.getFormValues(\'formControl\'))" />
+      </div></td>
+    </tr>
 </table>';
     }
     $objResponse->addAssign("control", "innerHTML", $formulario);
@@ -322,6 +342,20 @@ function CambiarFormulario ($datos) {
         align          :    "Tl",           // alignment (defaults to "Bl")
         singleClick    :    true
     });');
+    return $objResponse;
+}
+
+function procesarAsiento ($datos) {
+    $objResponse = new xajaxResponse();
+    if ($datos[tipo] == 0) {
+        print 'aca0';
+    }
+    else if ($datos[tipo] == 1) {
+        print 'aca1';
+    }
+    else if ($datos[tipo] == 2) {
+        print 'aca2';
+    }
     return $objResponse;
 }
 
