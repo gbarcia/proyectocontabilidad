@@ -1,0 +1,57 @@
+@charset "utf-8";
+/*
+Document   : styleDisposicion
+Created on : Feb 23, 2009, 6:08:45 PM
+Author     : jonathan
+Description:
+Disposicion de los paneles.
+*/
+body{
+    margin: 0px;
+}
+.cuerpo {
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    clear:both;
+    margin-bottom:10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.izq {
+    float: left;
+    width: 49%;
+    margin-bottom:inherit;
+}
+.der {
+    float: right;
+    width: 49%;
+    margin-bottom:inherit;
+}
+.izq2 {
+    float: left;
+    width: 74%;
+    margin-bottom:inherit;
+}
+.der2 {
+    float: right;
+    width: 24%;
+    margin-bottom:inherit;
+}
+.filtros {
+    background-color: #CCCCCC;
+    border: 1px solid #000000;
+    margin-bottom:inherit;
+}
+.panel {
+    background-color: #BCE0E7;
+    border: 1px solid #067AC2;
+    margin-bottom:inherit;
+}
+.panelSesion{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    position:absolute;
+    width: auto;
+    height: auto;
+    top:5px;
+    right:5px;
+}

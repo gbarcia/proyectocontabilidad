@@ -1,0 +1,116 @@
+@charset "utf-8";
+/*
+Document   : styleTabla
+Created on : Feb 21, 2009, 12:38:51 AM
+Author     : jonathan
+Description:
+Estilo para tablas de resultados
+*/
+/* Genericos */
+thead tr {
+    position:relative;
+    top: expression(offsetParent.scrollTop); /*IE5+ only*/
+}
+thead td, thead th {
+    text-align:left;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 14px;
+    background-color: #067AC2;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-top: solid 1px #d8d8d8;
+    border-left: solid 1px #d8d8d8;
+}
+table tfoot tr { /*idea of Renato Cherullo to help IE*/
+    position: relative;
+    overflow-x: hidden;
+    top: expression(parentNode.parentNode.offsetHeight >= offsetParent.offsetHeight ? 0 - parentNode.parentNode.offsetHeight + offsetParent.offsetHeight + offsetParent.scrollTop : 0);
+}
+tfoot td {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #DDDDDD;
+    color: #000000;
+    border-top: solid 1px #d8d8d8;
+}
+td:last-child {
+    padding-right: 20px; /*prevent Mozilla scrollbar from hiding cell content*/
+}
+
+/* Formularios */
+.formTable {
+    border-right: solid 1px #d8d8d8;
+}
+.formTable>tbody	{  /* child selector syntax which IE6 and older do not support*/
+    overflow: auto;
+    height: auto;
+}
+.formTable>tbody>tr>td	{
+    color: #000;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 14px;
+    border-bottom: solid 1px #d8d8d8;
+    border-left: solid 1px #d8d8d8;
+}
+
+/* Fichas */
+.fichaTable {
+    border-right: solid 1px #d8d8d8;
+}
+.fichaTable>tbody	{  /* child selector syntax which IE6 and older do not support*/
+    overflow: auto;
+    height: auto;
+}
+.fichaTable>tbody>tr>td	{
+    color: #000;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: solid 1px #d8d8d8;
+    border-left: solid 1px #d8d8d8;
+}
+
+/* Tablas con scroll */
+.tableContainer {
+    width: 100%;		/* table width will be 99% of this*/
+    height: 295px; 	/* must be greater than tbody*/
+    overflow: auto;
+    margin-bottom: inherit;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.scrollTable {
+    width: 99%;		/*100% of container produces horiz. scroll in Mozilla*/
+    border: none;
+    background-color: #F4F4F4;
+    height: auto;
+}
+.scrollTable>tbody	{  /* child selector syntax which IE6 and older do not support*/
+    overflow: auto;
+    height: 250px;
+    overflow-x: hidden;
+}
+.scrollTable>tbody>tr>td	{
+    color: #000;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 14px;
+    border-bottom: solid 1px #d8d8d8;
+    border-left: solid 1px #d8d8d8;
+}
+
+/* Colores Estados */
+.r1 {
+    background-color: #F4F4F4;
+}
+.r0 {
+    background-color: #E9E9E9;
+}
+.confirmado {
+    background-color: #AACEFF;
+}
+.porPagar {
+    background-color: #FBC1AE;
+}

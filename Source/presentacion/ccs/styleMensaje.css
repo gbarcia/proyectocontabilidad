@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* 
+Document   : styleMensaje
+Created on : Feb 23, 2009, 6:08:45 PM
+Author     : jonathan
+Description:
+Estilo para los mensajes de informacion.
+*/
+.advertencia {
+    background-color: #FFEAAA;
+    border: 1px solid #FFCF40;
+    width: 75%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+}
+.error {
+    background-color: #FBC1AE;
+    border: 1px solid #F57549;
+    width: 75%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+}
+.exito {
+    background-color: #BFFFAA;
+    border: 1px solid #71FE41;
+    width: 75%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+}
+.mensaje{
+    background-color: #AACEFF;
+    border: 1px solid #4092FF;
+    width: 75%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+}
+.textoMensaje{
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+}
+.botonCerrar{
+    position:absolute;
+    width: 16px;
+    height: 16px;
+    top:1px;
+    right:1px;
+}
+.nota {
+    background-color: #FFFF7A;
+    border: 1px solid #FDF601;
+    padding: 5px;
+}
