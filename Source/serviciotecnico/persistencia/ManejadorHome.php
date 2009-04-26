@@ -26,5 +26,17 @@ class ManejadorHome {
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
+
+     function obtenerTodasLasVentas () {
+        $resultado = false;
+        $query = "SELECT v.id, c.nombre nombreCliente, p.nombre nombreProducto, v.fecha, v.costo_unitario cu, v.cantidad can
+                  FROM VENTA v, CLIENTE c, PRODUCTO p
+                  WHERE v.CLIENTE_rif = c.rif
+                  AND v.PRODUCTO_id = p.id
+                  GROUP BY v.id
+                  ORDER BY v.fecha LIMIT 10";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
 }
 ?>
