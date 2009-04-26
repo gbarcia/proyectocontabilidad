@@ -1,6 +1,10 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/serviciotecnico/persistencia/ManejadorAsiento.php';
+
 
 function generarFormularioNuevaCompra () {
+    $controlAsiento = new ManejadorAsiento();
+    $recursoProductos = $controlAsiento->obtenerTodosLosProductos();
     $formulario = "";
     $formulario = '<table width="34%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -14,6 +18,8 @@ function generarFormularioNuevaCompra () {
   <tr>
     <td>Proveedor:</td>
     <td><select name="select" id="select">
+        <option value="J-1248931-5">Epson </option>
+        <option value="J-3466793-1">HP </option>
     </select>
     </td>
   </tr>
