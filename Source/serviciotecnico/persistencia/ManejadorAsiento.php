@@ -32,5 +32,12 @@ class ManejadorAsiento {
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
+
+    function obtenerTodasLasCuentas () {
+        $resultado = false;
+        $query = "SELECT * FROM CUENTA";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
 }
 ?>

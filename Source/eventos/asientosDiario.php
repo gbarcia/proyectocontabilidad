@@ -7,7 +7,7 @@ function generarFormularioNuevaCompra () {
     $formulario = '<table style="formTable" width="34%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td colspan="2" bgcolor="#000000"><span class="style1">Nueva Compra</span></td>
-  </tr>
+  </tr><input type="hidden" name="tipo" id="tipo" value="0" />
   <tr>
     <td width="42%">Fecha:</td>
     <td width="58%"><label>
@@ -59,7 +59,7 @@ function CambiarFormulario ($datos) {
   <tr>
     <td colspan="2" bgcolor="#000000"><span class="style1">Nueva Compra</span></td>
   </tr>
-  <tr>
+  <tr><input type="hidden" name="tipo" id="tipo" value="0"/>
     <td width="42%">Fecha:</td>
     <td width="58%"><label>
         <input type="text" name="fecha" id="f_date_c" readonly="1" size="15" /><img src="jscalendar/img.gif" id="f_trigger_c" style="cursor: pointer; border: 1px solid red;" title="Date selector"</td>
@@ -93,9 +93,9 @@ function CambiarFormulario ($datos) {
     else if ($datos[tipoAsiento] == 1) {
         $formulario = '<table style="formTable" width="34%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td colspan="2" bgcolor="#000000"><span class="style1">Nueva Compra</span></td>
+    <td colspan="2" bgcolor="#000000"><span class="style1">Nueva Venta</span></td>
   </tr>
-  <tr>
+  <tr><input type="hidden" name="tipo" id="tipo" value="1" />
     <td width="42%">Fecha:</td>
     <td width="58%"><label>
         <input type="text" name="fecha" id="f_date_c" readonly="1" size="15" /><img src="jscalendar/img.gif" id="f_trigger_c" style="cursor: pointer; border: 1px solid red;" title="Date selector"</td>
@@ -127,7 +127,191 @@ function CambiarFormulario ($datos) {
 </table>';
     }
     else if ($datos[tipoAsiento] == 2) {
+        $controlCuenta = new ManejadorAsiento();
+        $recursoCuenta = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta2 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta3 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta4 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta5 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta6 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta7 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta8 = $controlCuenta->obtenerTodasLasCuentas();
+        $recursoCuenta9 = $controlCuenta->obtenerTodasLasCuentas();
+        $formulario = '<table width="79%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="8" bgcolor="#000000"><span class="style1">Nuevo Asiento Contable General</span></td>
+  </tr>
+  <tr>
+    <td width="3%">&nbsp;</td>
+    <td>Fecha:</td>
+    <td colspan="3"><label>
+        <input type="text" name="fecha" id="f_date_c" readonly="1" size="15" /><img src="jscalendar/img.gif" id="f_trigger_c" style="cursor: pointer; border: 1px solid red;" title="Date selector"</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input name="hiddenField" type="hidden" id="hiddenField" value="2" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="center">
+      <input name="uno" type="checkbox" id="uno" checked="checked" />
+    </div></td>
+    <td width="8%">Cuenta:</td>
+    <td width="13%"><select name="cuenta1" id="select">
+    ';
+        while ($row1 = mysql_fetch_array($recursoCuenta)) {
+            $formulario .= "<option value='".$row1[num]."'>".'('.$row1[tipo].')'.$row1[nombre]." </option>";
+        }
 
+    $formulario .= '</select>    </td>
+    <td width="9%">Debitar:</td>
+    <td width="15%"><input name="d1" type="text" id="d1" size="10" /></td>
+    <td width="6%">&nbsp;</td>
+    <td width="13%">Acreditar:</td>
+    <td width="33%"><input name="h1" type="text" id="h1" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input name="dos" type="checkbox" id="dos" checked="checked" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta2" id="select">';
+        while ($row2 = mysql_fetch_array($recursoCuenta2)) {
+            $formulario .= "<option value='".$row2[num]."'>".'('.$row2[tipo].')'.$row2[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d2" type="text" id="d2" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h2" type="text" id="h2" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="tres" id="tres" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta3" id="select">';
+        while ($row3 = mysql_fetch_array($recursoCuenta3)) {
+            $formulario .= "<option value='".$row3[num]."'>".'('.$row3[tipo].')'.$row3[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d3" type="text" id="d3" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h3" type="text" id="h3" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="cuatro" id="cuatro" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta4" id="select">';
+        while ($row4 = mysql_fetch_array($recursoCuenta4)) {
+            $formulario .= "<option value='".$row4[num]."'>".'('.$row4[tipo].')'.$row4[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d4" type="text" id="d4" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h4" type="text" id="h4" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="cinco" id="cinco" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta5" id="select">';
+      while ($row5 = mysql_fetch_array($recursoCuenta5)) {
+            $formulario .= "<option value='".$row5[num]."'>".'('.$row5[tipo].')'.$row5[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d5" type="text" id="d5" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h5" type="text" id="h5" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="seis" id="seis" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta6" id="select">';
+        while ($row6 = mysql_fetch_array($recursoCuenta6)) {
+            $formulario .= "<option value='".$row6[num]."'>".'('.$row6[tipo].')'.$row6[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d6" type="text" id="d6" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h6" type="text" id="h6" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="siete" id="siete" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta7" id="select">';
+        while ($row7 = mysql_fetch_array($recursoCuenta7)) {
+            $formulario .= "<option value='".$row7[num]."'>".'('.$row7[tipo].')'.$row7[nombre]." </option>";
+        }
+      $formulario .='</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d7" type="text" id="d7" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h7" type="text" id="h7" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="ocho" id="ocho" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta8" id="select">';
+       while ($row8 = mysql_fetch_array($recursoCuenta8)) {
+            $formulario .= "<option value='".$row8[num]."'>".'('.$row8[tipo].')'.$row8[nombre]." </option>";
+        }
+      $formulario .= '</select>    </td>
+    <td>Debitar:</td>
+    <td><input name="d8" type="text" id="d8" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h8" type="text" id="h8" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="nueve" id="nueve" /></td>
+    <td>Cuenta:</td>
+    <td><select name="cuenta9" id="select">';
+         while ($row9 = mysql_fetch_array($recursoCuenta9)) {
+            $formulario .= "<option value='".$row9[num]."'>".'('.$row9[tipo].')'.$row9[nombre]." </option>";
+        }
+      $formulario .= '</select>
+    </td>
+    <td>Debitar:</td>
+    <td><input name="d9" type="text" id="d9" size="10" /></td>
+    <td>&nbsp;</td>
+    <td>Acreditar:</td>
+    <td><input name="h9" type="text" id="h9" size="10" /></td>
+  </tr>
+  <tr>
+    <td colspan="8">&nbsp;</td>
+  </tr>
+</table>';
     }
     $objResponse->addAssign("control", "innerHTML", $formulario);
     $objResponse->addScript('
