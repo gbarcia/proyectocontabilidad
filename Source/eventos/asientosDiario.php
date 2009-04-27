@@ -2,6 +2,34 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/serviciotecnico/persistencia/ManejadorAsiento.php';
 
 
+function mostrarLibroDiario ($datos) {
+    $controlAsiento = new ManejadorAsiento();
+    $recurso = $controlAsiento->obtenerLibroDiario($datos[fechaInicio], $datos[fechaFin]);
+    $objResponse = new xajaxResponse();
+    $resultado = '<table cellspacing="0" class="" border="1">';
+    $resultado.= '<thead>';
+    $resultado.= '<tr>';
+    $resultado.= '<th>NUM</th>';
+    $resultado.= '<th>FECHA</th>';
+    $resultado.= '<th>CUENTA</th>';
+    $resultado.= '<th>DEBE</th>';
+    $resultado.= '<th>HABER</th>';
+    $resultado.= '</tr>';
+    $resultado.= '</thead>';
+    while ($row = mysql_fetch_array($recurso)) {
+        $resultado.= '<td>' . $row[num]. '</td>';
+        $resultado.= '<td>' . $row[fecha]. '</td>';
+        $resultado.= '<td>' . $row[nombreCuenta]. '</td>';
+        $resultado.= '<td>' . $row[debe]. '</td>';
+        $resultado.= '<td>' . $row[haber]. '</td>';
+        $resultado.= '</tr>';
+    }
+    $resultado.= '</table>';
+    $objResponse->addAssign("librod", "innerHTML", $resultado);
+    return $objResponse;
+}
+
+
 function generarFormularioNuevaCompra () {
     $formulario = "";
     $formulario = '<table style="formTable" width="34%" border="0" cellspacing="0" cellpadding="0">

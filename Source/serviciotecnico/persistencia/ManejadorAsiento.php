@@ -54,5 +54,17 @@ class ManejadorAsiento {
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
+
+    function obtenerLibroDiario ($fechaInicio,$fechaFin) {
+        $resultado = false;
+        $query = "SELECT a.num, a.fecha, r.debe,r.haber, c.nombre nombreCuenta
+                  FROM ASIENTO a, REGISTRO r, CUENTA c
+                  WHERE a.num = r.ASIENTO_num
+                  AND c.num = r.CUENTA_num
+                  AND a.fecha BETWEEN '".$fechaInicio."' AND '".$fechaFin."'
+                  ORDER BY a.num,a.fecha";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
 }
 ?>
