@@ -358,7 +358,7 @@ function procesarAsiento ($datos) {
         $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaEgreso, $montoTotal,0, 'C');
     }
     else if ($datos[tipo] == 1) {
-        //REGISTRAR COMPRA
+        //REGISTRAR VENTA
         $controlAsiento = new ManejadorAsiento();
         $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
         if ($datos[producto] == 1) $cuentaIngreso = 10;
@@ -368,7 +368,72 @@ function procesarAsiento ($datos) {
         $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaIngreso,0,$montoTotal, 'V');
     }
     else if ($datos[tipo] == 2) {
-        print 'aca2';
+        // OTRO ASIENTO
+        $controlAsiento = new ManejadorAsiento();
+        $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
+        if ($datos[uno] == true) {
+            $debe = $datos[d1];
+             $haber = $datos[h1];
+            if ($datos[d1] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta1], $debe,$haber , 'O');
+        }
+        if ($datos[dos] == true && $datos[uno] == true) {
+             $debe = $datos[d2];
+             $haber = $datos[h2];
+             if ($datos[d2] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta2], $debe,$haber , 'O');
+        }
+        if ($datos[tres] == true && $datos[tres] == true) {
+             $debe = $datos[d3];
+             $haber = $datos[h3];
+             if ($datos[d3] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta3], $debe,$haber , 'O');
+        }
+        if ($datos[cuatro] == true && $datos[cuatro] == true) {
+             $debe = $datos[d4];
+             $haber = $datos[h4];
+             if ($datos[d4] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta4], $debe,$haber , 'O');
+        }
+        if ($datos[cinco] == true && $datos[cinco] == true) {
+             $debe = $datos[d5];
+             $haber = $datos[h5];
+             if ($datos[d5] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta5], $debe,$haber , 'O');
+        }
+        if ($datos[seis] == true && $datos[seis] == true) {
+             $debe = $datos[d6];
+             $haber = $datos[h6];
+             if ($datos[d6] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta6], $debe,$haber , 'O');
+        }
+        if ($datos[siete] == true && $datos[siete] == true) {
+             $debe = $datos[d7];
+             $haber = $datos[h7];
+             if ($datos[d7] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta7], $debe,$haber , 'O');
+        }
+        if ($datos[ocho] == true && $datos[ocho] == true) {
+             $debe = $datos[d8];
+             $haber = $datos[h8];
+             if ($datos[d8] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta8], $debe,$haber , 'O');
+        }
+        if ($datos[nueve] == true && $datos[nueve] == true) {
+             $debe = $datos[d9];
+             $haber = $datos[h9];
+             if ($datos[d9] == '') $debe = 0;
+            else $haber = 0;
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta9], $debe,$haber , 'O');
+        }
     }
     return $objResponse;
 }
