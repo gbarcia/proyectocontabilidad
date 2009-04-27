@@ -402,7 +402,7 @@ function procesarAsiento ($datos) {
     }
     else if ($datos[tipo] == 1) {
         $controlVenta = new Insercion();
-        $controlVenta->realizarVenta($datos[proveedor], $datos[producto], $datos[fecha], $datos[costo], $datos[cantidad]);
+        $controlVenta->realizarVenta($datos[cliente], $datos[producto], $datos[fecha], $datos[costo], $datos[cantidad]);
         $controlAsiento = new ManejadorAsiento();
         $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
         if ($datos[producto] == 1) $cuentaIngreso = 10;
@@ -478,8 +478,8 @@ function procesarAsiento ($datos) {
              if ($datos[d9] == '') $debe = 0;
             else $haber = 0;
             $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta9], $debe,$haber , 'O');
-            $objResponse->addAlert("Asiento registrado con exito");
         }
+        $objResponse->addAlert("Asiento registrado con exito");
     }
     return $objResponse;
 }
