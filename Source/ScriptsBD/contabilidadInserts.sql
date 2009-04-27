@@ -5,12 +5,12 @@ INSERT INTO `CLIENTE` (`rif`, `nombre`) VALUES ('J-30877383-2', 'ABI COMPUTER CA
 INSERT INTO `CLIENTE` (`rif`, `nombre`) VALUES ('J-30667580-9', 'COMPU PARTS SA');
 COMMIT;
 
-INSERT INTO `PRODUCTO` (`id`, `nombre`, `costo_unitario`) VALUES (1, 'MOUSE OPTICO', 30);
-INSERT INTO `PRODUCTO` (`id`, `nombre`, `costo_unitario`) VALUES (2, 'MOUSE LASER', 50);
+INSERT INTO `PRODUCTO` (`id`, `nombre`, `costo_unitario`) VALUES (1, 'MOUSE OPTICO', 80);
+INSERT INTO `PRODUCTO` (`id`, `nombre`, `costo_unitario`) VALUES (2, 'MOUSE LASER', 100);
 COMMIT;
 
 INSERT INTO `VENTA` (`id`, `CLIENTE_rif`, `PRODUCTO_id`, `fecha`, `costo_unitario`, `cantidad`) VALUES (1, 'J-30877383-2', 1, '2009-01-15', 80, 50);
-INSERT INTO `VENTA` (`id`, `CLIENTE_rif`, `PRODUCTO_id`, `fecha`, `costo_unitario`, `cantidad`) VALUES (2, 'J-30877383-5', 2, '2009-01-20', 100, 30)
+INSERT INTO `VENTA` (`id`, `CLIENTE_rif`, `PRODUCTO_id`, `fecha`, `costo_unitario`, `cantidad`) VALUES (2, 'J-30877383-5', 2, '2009-01-20', 100, 30);
 COMMIT;
 
 INSERT INTO `PROVEEDOR` (`rif`, `nombre`) VALUES ('J-3466793-1', 'HP');
