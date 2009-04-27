@@ -6,7 +6,7 @@ function mostrarLibroDiario ($datos) {
     $controlAsiento = new ManejadorAsiento();
     $recurso = $controlAsiento->obtenerLibroDiario($datos[fechaInicio], $datos[fechaFin]);
     $objResponse = new xajaxResponse();
-    $resultado = '<table cellspacing="0" class="" border="1">';
+    $resultado = '<table cellspacing="0" class="scrollTable">';
     $resultado.= '<thead>';
     $resultado.= '<tr>';
     $resultado.= '<th>NUM</th>';
@@ -17,11 +17,23 @@ function mostrarLibroDiario ($datos) {
     $resultado.= '</tr>';
     $resultado.= '</thead>';
     while ($row = mysql_fetch_array($recurso)) {
+        if ($row[debe] == 0) {
+            $debe = "";
+        }
+        else {
+            $debe = $row[debe];
+        }
+        if ($row[haber] == 0){
+            $haber ="";
+        }
+        else {
+            $haber = $row[haber];
+        }
         $resultado.= '<td>' . $row[num]. '</td>';
         $resultado.= '<td>' . $row[fecha]. '</td>';
         $resultado.= '<td>' . $row[nombreCuenta]. '</td>';
-        $resultado.= '<td>' . $row[debe]. '</td>';
-        $resultado.= '<td>' . $row[haber]. '</td>';
+        $resultado.= '<td>' . $debe. '</td>';
+        $resultado.= '<td>' . $haber. '</td>';
         $resultado.= '</tr>';
     }
     $resultado.= '</table>';
