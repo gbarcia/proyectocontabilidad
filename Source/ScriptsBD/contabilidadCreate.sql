@@ -2,15 +2,15 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `contabilidad` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `contabilidad`;
+CREATE SCHEMA IF NOT EXISTS `contabilidadGrupo2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `contabilidadGrupo2`;
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`ASIENTO`
+-- Table `contabilidadGrupo2`.`ASIENTO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`ASIENTO` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`ASIENTO` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`ASIENTO` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`ASIENTO` (
   `num` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `fecha` DATE NOT NULL ,
   PRIMARY KEY (`num`) )
@@ -19,11 +19,11 @@ PACK_KEYS = DEFAULT;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`CUENTA`
+-- Table `contabilidadGrupo2`.`CUENTA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`CUENTA` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`CUENTA` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`CUENTA` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`CUENTA` (
   `num` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `tipo` VARCHAR(1) NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
@@ -33,11 +33,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`CLIENTE`
+-- Table `contabilidadGrupo2`.`CLIENTE`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`CLIENTE` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`CLIENTE` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`CLIENTE` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`CLIENTE` (
   `rif` VARCHAR(20) NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`rif`) )
@@ -45,11 +45,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`PRODUCTO`
+-- Table `contabilidadGrupo2`.`PRODUCTO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`PRODUCTO` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`PRODUCTO` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`PRODUCTO` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`PRODUCTO` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(45) NOT NULL ,
   `costo_unitario` FLOAT UNSIGNED NOT NULL ,
@@ -58,11 +58,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`VENTA`
+-- Table `contabilidadGrupo2`.`VENTA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`VENTA` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`VENTA` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`VENTA` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`VENTA` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `CLIENTE_rif` VARCHAR(20) NOT NULL ,
   `PRODUCTO_id` INT UNSIGNED NOT NULL ,
@@ -74,23 +74,23 @@ CREATE  TABLE IF NOT EXISTS `contabilidad`.`VENTA` (
   INDEX `fk_CLIENTE_has_PRODUCTO_PRODUCTO` (`PRODUCTO_id` ASC) ,
   CONSTRAINT `fk_CLIENTE_has_PRODUCTO_CLIENTE`
     FOREIGN KEY (`CLIENTE_rif` )
-    REFERENCES `contabilidad`.`CLIENTE` (`rif` )
+    REFERENCES `contabilidadGrupo2`.`CLIENTE` (`rif` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CLIENTE_has_PRODUCTO_PRODUCTO`
     FOREIGN KEY (`PRODUCTO_id` )
-    REFERENCES `contabilidad`.`PRODUCTO` (`id` )
+    REFERENCES `contabilidadGrupo2`.`PRODUCTO` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`PROVEEDOR`
+-- Table `contabilidadGrupo2`.`PROVEEDOR`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`PROVEEDOR` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`PROVEEDOR` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`PROVEEDOR` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`PROVEEDOR` (
   `rif` VARCHAR(20) NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`rif`) )
@@ -98,11 +98,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`COMPRA`
+-- Table `contabilidadGrupo2`.`COMPRA`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`COMPRA` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`COMPRA` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`COMPRA` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`COMPRA` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `PRODUCTO_id` INT UNSIGNED NOT NULL ,
   `PROVEEDOR_rif` VARCHAR(20) NOT NULL ,
@@ -114,22 +114,22 @@ CREATE  TABLE IF NOT EXISTS `contabilidad`.`COMPRA` (
   INDEX `fk_PRODUCTO_has_PROVEEDOR_PROVEEDOR` (`PROVEEDOR_rif` ASC) ,
   CONSTRAINT `fk_PRODUCTO_has_PROVEEDOR_PRODUCTO`
     FOREIGN KEY (`PRODUCTO_id` )
-    REFERENCES `contabilidad`.`PRODUCTO` (`id` )
+    REFERENCES `contabilidadGrupo2`.`PRODUCTO` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PRODUCTO_has_PROVEEDOR_PROVEEDOR`
     FOREIGN KEY (`PROVEEDOR_rif` )
-    REFERENCES `contabilidad`.`PROVEEDOR` (`rif` )
+    REFERENCES `contabilidadGrupo2`.`PROVEEDOR` (`rif` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `contabilidad`.`REGISTRO`
+-- Table `contabilidadGrupo2`.`REGISTRO`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contabilidad`.`REGISTRO` ;
+DROP TABLE IF EXISTS `contabilidadGrupo2`.`REGISTRO` ;
 
-CREATE  TABLE IF NOT EXISTS `contabilidad`.`REGISTRO` (
+CREATE  TABLE IF NOT EXISTS `contabilidadGrupo2`.`REGISTRO` (
   `ASIENTO_num` INT UNSIGNED NOT NULL ,
   `CUENTA_num` INT UNSIGNED NOT NULL ,
   `debe` FLOAT NULL ,
@@ -148,22 +148,22 @@ CREATE  TABLE IF NOT EXISTS `contabilidad`.`REGISTRO` (
   INDEX `fk_REGISTRO_COMPRA` (`COMPRA_id` ASC, `COMPRA_PRODUCTO_id` ASC, `COMPRA_PROVEEDOR_rif` ASC) ,
   CONSTRAINT `fk_ASIENTO_has_CUENTA_ASIENTO`
     FOREIGN KEY (`ASIENTO_num` )
-    REFERENCES `contabilidad`.`ASIENTO` (`num` )
+    REFERENCES `contabilidadGrupo2`.`ASIENTO` (`num` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ASIENTO_has_CUENTA_CUENTA`
     FOREIGN KEY (`CUENTA_num` )
-    REFERENCES `contabilidad`.`CUENTA` (`num` )
+    REFERENCES `contabilidadGrupo2`.`CUENTA` (`num` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_REGISTRO_VENTA`
     FOREIGN KEY (`VENTA_id` , `VENTA_CLIENTE_rif` , `VENTA_PRODUCTO_id` )
-    REFERENCES `contabilidad`.`VENTA` (`id` , `CLIENTE_rif` , `PRODUCTO_id` )
+    REFERENCES `contabilidadGrupo2`.`VENTA` (`id` , `CLIENTE_rif` , `PRODUCTO_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_REGISTRO_COMPRA`
     FOREIGN KEY (`COMPRA_id` , `COMPRA_PRODUCTO_id` , `COMPRA_PROVEEDOR_rif` )
-    REFERENCES `contabilidad`.`COMPRA` (`id` , `PRODUCTO_id` , `PROVEEDOR_rif` )
+    REFERENCES `contabilidadGrupo2`.`COMPRA` (`id` , `PRODUCTO_id` , `PROVEEDOR_rif` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
