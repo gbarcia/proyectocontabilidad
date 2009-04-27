@@ -13,12 +13,8 @@
         private $costoUnitario;
         private $cantidad;
 
-        function __construct($idProducto, $rif, $fecha, $costoUnitario, $cantidad) {
-            $this->idProducto = $idProducto;
-            $this->rif = $rif;
-            $this->fecha = $fecha;
-            $this->costoUnitario = $costoUnitario;
-            $this->cantidad = $cantidad;
+        function __construct() {
+            
         }
 
         function realizarCompra($idProducto, $rifProveedor, $fecha, $costoUnitario, $cantidad) {

@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/serviciotecnico/persistencia/ManejadorAsiento.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/logica/Insercion.php';
 
 
 function mostrarLibroDiario ($datos) {
@@ -388,7 +389,8 @@ function CambiarFormulario ($datos) {
 function procesarAsiento ($datos) {
     $objResponse = new xajaxResponse();
     if ($datos[tipo] == 0) {
-        //REGISTRAR COMPRA
+        $controlCompra = new Insercion();
+        $controlCompra->realizarCompra($datos[producto], $datos[proveedor], $datos[fecha], $datos[costo], $datos[cantidad]);
         $controlAsiento = new ManejadorAsiento();
         $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
         if ($datos[producto] == 1) $cuentaEgreso = 12;
@@ -396,9 +398,11 @@ function procesarAsiento ($datos) {
         $montoTotal = $datos[cantidad] * $datos[costo];
         $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, 0, $montoTotal, 'C');
         $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaEgreso, $montoTotal,0, 'C');
+        $objResponse->addAlert("Compra registrada con exito");
     }
     else if ($datos[tipo] == 1) {
-        //REGISTRAR VENTA
+        $controlVenta = new Insercion();
+        $controlVenta->realizarVenta($datos[proveedor], $datos[producto], $datos[fecha], $datos[costo], $datos[cantidad]);
         $controlAsiento = new ManejadorAsiento();
         $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
         if ($datos[producto] == 1) $cuentaIngreso = 10;
@@ -406,6 +410,7 @@ function procesarAsiento ($datos) {
         $montoTotal = $datos[cantidad] * $datos[costo];
         $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, $montoTotal,0 , 'V');
         $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaIngreso,0,$montoTotal, 'V');
+        $objResponse->addAlert("Venta registrada con exito");
     }
     else if ($datos[tipo] == 2) {
         // OTRO ASIENTO
@@ -473,6 +478,7 @@ function procesarAsiento ($datos) {
              if ($datos[d9] == '') $debe = 0;
             else $haber = 0;
             $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta9], $debe,$haber , 'O');
+            $objResponse->addAlert("Asiento registrado con exito");
         }
     }
     return $objResponse;
