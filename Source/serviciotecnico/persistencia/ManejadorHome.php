@@ -1,7 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/serviciotecnico/utilidades/TransaccionBD.class.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] . '/Source/serviciotecnico/utilidades/TransaccionBD.class.php';
 
-
+require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
 /**
  * Description of ManejadorHome
  *

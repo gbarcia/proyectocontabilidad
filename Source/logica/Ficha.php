@@ -34,22 +34,14 @@ and open the template in the editor.
         </thead>
     <?php
         require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
+        require_once("../serviciotecnico/persistencia/ManejadorHome.php");
 
         class Inventario {
 
-            private $consultaCompras;
-            private $consultaVentas;
-            private $consultaContCompras;
-            private $consultaContVentas;
+            private $manejador;
 
             function __construct(){
-                $transaccion = new TransaccionBDclass();
-
-                $this->consultaCompras = $transaccion->realizarTransaccion("select * from compra");
-                $this->consultaVentas = $transaccion->realizarTransaccion("select * from venta");
-
-                $this->consultaContCompras = $transaccion->realizarTransaccion("select count(*) from compra");
-                $this->consultaContVentas = $transaccion->realizarTransaccion("select count(*) from venta");
+                $this->manejador = new ManejadorHome();
             }
 
             function mostrarFicha(){
@@ -57,22 +49,34 @@ and open the template in the editor.
                 $costoUnitario = 0;   //los valores del
                 $total = 0;           //inventario inicial
 
-                $contCompras = mysql_result($this->consultaContCompras, 0, 0);
-                $contVentas = mysql_result($this->consultaContVentas, 0, 0);
+                $consultaCompras = $this->manejador->obtenerTodasLasCompras();
+                $consultaVentas = $this->manejador->obtenerTodasLasVentas();
 
-                while (($rowCompras = mysql_fetch_array($this->consultaCompras))
-                        | ($rowVentas = mysql_fetch_array($this->consultaVentas))) {
+                $i = 0;
+                
+                while (($rowCompras = mysql_fetch_array($consultaCompras)) | ($rowVentas = mysql_fetch_array($consultaVentas))) {
+                    $fechas[$i] = $rowCompras[fecha]; $i++;
+                    $fechas[$i] = $rowVentas[fecha]; $i++;
+                }
+                
+                for ($i = 0; $i < count($fechas)-1; $i++) {
+                    echo "Fecha: ".$fechas[$i]."<br>";
+                }
 
-                    echo "<br>Fecha compra: ".$rowCompras[fecha]." ";
+                /*while (($rowCompras = mysql_fetch_array($consultaCompras)) || ($rowVentas = mysql_fetch_array($consultaVentas))) {
+                    $rowCompras = mysql_fetch_array($consultaCompras);
+                    $rowVentas = mysql_fetch_array($consultaVentas);
+
+                    echo "Fecha compra: ".$rowCompras[fecha]."<br>";
                     echo "Fecha venta: ".$rowVentas[fecha]."<br>";
 
-                    if ($rowCompras[fecha] <= $rowVentas[fecha]) {
+                    if ($rowCompras[fecha] <= $rowVentas[fecha]) {*/
 
                         /*
                          * Colocando valores en ENTRADAS y EXISTENCIAS
                          */
 
-                         $costoUnitario = ($total + ($rowCompras[cantidad] * $rowCompras[costo_unitario]))/($cantidad + $rowCompras[cantidad]);
+                         /*$costoUnitario = ($total + ($rowCompras[cantidad] * $rowCompras[costo_unitario]))/($cantidad + $rowCompras[cantidad]);
                          $cantidad += $rowCompras[cantidad];
                          $total += ($rowCompras[cantidad] * $rowCompras[costo_unitario]);
 
@@ -93,13 +97,13 @@ and open the template in the editor.
                             round($rowCompras[cantidad] * $rowCompras[costo_unitario]),
                             $cantidad, round($costoUnitario*100)/100, round($total));
                     }
-                    else {
+                    else {*/
                         
                         /*
                          * Colocando valores en SALIDAS y EXISTENCIAS
                          */
 
-                         $cantidad -= $rowVentas[cantidad];
+                        /* $cantidad -= $rowVentas[cantidad];
                          $total -= ($rowVentas[cantidad] * $costoUnitario);
 
                          printf("<tr align = 'center'>
@@ -118,7 +122,7 @@ and open the template in the editor.
                             round($rowVentas[cantidad] * $costoUnitario),
                             $cantidad, round($costoUnitario*100)/100, round($total));
                     }
-                }
+                }*/
             }
         }
     ?>
