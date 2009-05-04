@@ -60,8 +60,6 @@ and open the template in the editor.
                     }
                 }
 
-                //hasta aquí bien
-
                 $i = 0;
                 $j = 0;
                 $flag = true;
@@ -77,7 +75,8 @@ and open the template in the editor.
                     $impresion .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">EXISTENCIAS</font></th>';
                     $impresion .= '</tr>';
                     $impresion .= '<tr align = "center">';
-                    $impresion .= '<td colspan = "2"></td>';
+                    $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                    $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
                     $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
                     $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
@@ -98,16 +97,19 @@ and open the template in the editor.
                             $comp = 0;
                         }
                     }
-                    else if ($i > count($fechasCompras)) {
+                    else if (($i == count($fechasCompras)) && ($j == count($fechasVentas))) {
+                        $comp = -1;
+                        $i++;
+                        $j++;
+                    }
+                    else if ($i == count($fechasCompras)) {
                         $comp = 0;
                     }
-                    else if ($j > count($fechasVentas)) {
+                    else if ($j == count($fechasVentas)) {
                         $comp = 1;
                     }
-                    else {
-                        $comp = -1;
-                    }
 
+/****************************** BIEN HASTA AQUÍ ******************************/
 
                     if ($comp == 1) {
                         echo "<br>Fecha compra: ".$fechasCompras[$i]."<br>";
@@ -123,20 +125,28 @@ and open the template in the editor.
 
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowC[fecha].'</td>';
+                            echo $rowC[fecha]." ";
                             $impresion .= '<td>compra</td>';
+                            echo "compra ";
                             $impresion .= '<td>'.$rowC[cantidad].'</td>';
+                            echo $rowC[cantidad]." ";
                             $cu = round($rowC[costo_unitario]*100)/100;
                             $impresion .= '<td>'.$cu.'</td>';
+                            echo $cu." ";
                             $tot = round($rowC[cantidad] * $rowC[costo_unitario]);
                             $impresion .= '<td>'.$tot.'</td>';
+                            echo $tot." ";
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$cantidad.'</td>';
+                            echo $cantidad." ";
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
+                            echo $cUnitario." ";
                             $redTotal = round($total);
                             $impresion .= '<td>'.$redTotal.'</td>';
+                            echo $redTotal."<br><br>";
                             $impresion .= '</tr>';
                          }
 
@@ -156,19 +166,27 @@ and open the template in the editor.
 
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowV[fecha].'</td>';
+                            echo $rowV[fecha]." ";
                             $impresion .= '<td>venta</td>';
+                            echo "venta ";
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$rowV[cantidad].'</td>';
+                            echo $rowV[cantidad]." ";
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
+                            echo $cUnitario." ";
                             $tot = round($rowV[cantidad] * $costoUnitario);
                             $impresion .= '<td>'.$tot.'</td>';
+                            echo $tot." ";
                             $impresion .= '<td>'.$cantidad.'</td>';
+                            echo $cantidad." ";
                             $impresion .= '<td>'.$cUnitario.'</td>';
+                            echo $cUnitario." ";
                             $redTotal = round($total);
                             $impresion .= '<td>'.$redTotal.'</td>';
+                            echo $redTotal."<br><br>";
                             $impresion .= '</tr>';
                         }
 
