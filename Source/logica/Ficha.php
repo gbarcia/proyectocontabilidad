@@ -129,6 +129,9 @@ and open the template in the editor.
                             $impresion .= '<td>'.$cu.'</td>';
                             $tot = round($rowC[cantidad] * $rowC[costo_unitario]);
                             $impresion .= '<td>'.$tot.'</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$cantidad.'</td>';
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
@@ -154,6 +157,9 @@ and open the template in the editor.
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowV[fecha].'</td>';
                             $impresion .= '<td>venta</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                            $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$rowV[cantidad].'</td>';
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
