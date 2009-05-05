@@ -53,10 +53,36 @@ class ManejadorHome {
 
      function obtenerTodasLasVentasPorFecha ($fecha) {
         $resultado = false;
-        $query = "SELECT v.id, c.nombre nombreCliente, p.nombre nombreProducto, v.fecha, v.costo_unitario costo_unitario, v.cantidad cantidad
+        $query = "SELECT v.id, c.nombre nombreCliente, p.nombre nombreProducto, v.fecha, v.costo_unitario, v.cantidad
                   FROM VENTA v, CLIENTE c, PRODUCTO p
                   WHERE v.CLIENTE_rif = c.rif AND v.fecha = '$fecha'
                   AND v.PRODUCTO_id = p.id
+                  GROUP BY v.id
+                  ORDER BY v.fecha LIMIT 10";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+    function obtenerTodasLasComprasPorIdProducto ($idProducto) {
+        $resultado = false;
+        $query = "SELECT c.id, p.nombre nombreProducto , pr.nombre nombreProve, c.fecha,c.costo_unitario, c.cantidad
+                  FROM COMPRA c, PRODUCTO p, PROVEEDOR pr
+                  WHERE c.PRODUCTO_id = p.id
+                  AND c.PROVEEDOR_rif = pr.rif
+                  AND p.id = $idProducto
+                  GROUP BY c.id
+                  ORDER BY c.fecha LIMIT 10";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+     function obtenerTodasLasVentasPorIdProducto ($idProducto) {
+        $resultado = false;
+        $query = "SELECT v.id, c.nombre nombreCliente, p.nombre nombreProducto, v.fecha, v.costo_unitario cu, v.cantidad can
+                  FROM VENTA v, CLIENTE c, PRODUCTO p
+                  WHERE v.CLIENTE_rif = c.rif
+                  AND v.PRODUCTO_id = p.id
+                  AND p.id = $idProducto
                   GROUP BY v.id
                   ORDER BY v.fecha LIMIT 10";
         $resultado = $this->transaccion->realizarTransaccion($query);

@@ -12,22 +12,29 @@ and open the template in the editor.
     <?php
         require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
         require_once("../serviciotecnico/persistencia/ManejadorHome.php");
+        require_once("../serviciotecnico/persistencia/ManejadorProducto.php");
 
         class Inventario {
 
             private $manejadorHome;
+            private $manejadorProducto;
 
             function __construct(){
                 $this->manejadorHome = new ManejadorHome();
+                $this->manejadorProducto = new ManejadorProducto();
             }
 
-            function mostrarFicha() {
+            function mostrarFicha($nombreProducto) {
                 $cantidad = 0;        //Aquí van
                 $costoUnitario = 0;   //los valores del
                 $total = 0;           //inventario inicial
 
-                $consultaCompras = $this->manejadorHome->obtenerTodasLasCompras();
-                $consultaVentas = $this->manejadorHome->obtenerTodasLasVentas();
+                $consultaIdProducto = $this->manejadorProducto->obtenerIdProducto($nombreProducto);
+
+                $idProducto = mysql_result($consultaIdProducto, 0, 0);
+
+                $consultaCompras = $this->manejadorHome->obtenerTodasLasComprasPorIdProducto($idProducto);
+                $consultaVentas = $this->manejadorHome->obtenerTodasLasVentasPorIdProducto($idProducto);
 
                 $i = 0;
                 while ($rowCompras = mysql_fetch_array($consultaCompras)) {
@@ -39,7 +46,7 @@ and open the template in the editor.
                     $fechasVentas[$j] = $rowVentas[fecha]; $j++;
                 }
 
-                for ($j = 0; $j < count($fechasVentas); $j++) {
+                /*for ($j = 0; $j < count($fechasVentas); $j++) {
                     $consultaVentasPorFecha = $this->manejadorHome->obtenerTodasLasVentasPorFecha($fechasVentas[$j]);
 
                     while ($rowV = mysql_fetch_array($consultaVentasPorFecha)) {
@@ -58,7 +65,7 @@ and open the template in the editor.
                         echo "Costo unitario: ".$rowC[costo_unitario]." ";
                         echo "Cantidad: ".$rowC[cantidad]."<br>";
                     }
-                }
+                }*/
 
                 $i = 0;
                 $j = 0;
@@ -112,7 +119,7 @@ and open the template in the editor.
 /****************************** BIEN HASTA AQUÍ ******************************/
 
                     if ($comp == 1) {
-                        echo "<br>Fecha compra: ".$fechasCompras[$i]."<br>";
+                        //echo "<br>Fecha compra: ".$fechasCompras[$i]."<br>";
                         
                         $consultaComprasPorFecha = $this->manejadorHome->obtenerTodasLasComprasPorFecha($fechasCompras[$i]);
                         /*
@@ -154,7 +161,7 @@ and open the template in the editor.
                          
                     }
                     else if ($comp == 0) {
-                        echo "<br>Fecha venta: ".$fechasVentas[$j]."<br>";
+                        //echo "<br>Fecha venta: ".$fechasVentas[$j]."<br>";
                         
                         $consultaVentasPorFecha = $this->manejadorHome->obtenerTodasLasVentasPorFecha($fechasVentas[$j]);
                         /*
