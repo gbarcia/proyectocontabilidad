@@ -46,18 +46,25 @@ class ManejadorCuenta {
     function consultarIngresos ($fechaInicio, $fechaFin) {
         $resultado = false;
         $query = "SELECT v.fecha, v.costo_unitario, v.cantidad, c.nombre
-        FROM registro r, venta v, cuenta c
-        WHERE v.id = r.VENTA_id AND r.CUENTA_num = c.num AND v.fecha
-        BETWEEN '$fechaInicio' AND '$fechaFin'";
+        FROM REGISTRO r, VENTA v, CUENTA c
+        WHERE v.id = r.VENTA_id AND r.CUENTA_num = c.num
+        AND v.fecha BETWEEN '$fechaInicio' AND '$fechaFin'";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
 
-    function consultarCostosVenta () {
+    function consultarCostosVenta ($nombreCuentas) {
         $resultado = false;
-        $query = "SELECT SUM(r.debe) debe , SUM(r.haber) haber , c.nombre,c.num,c.tipo
+
+        $query = "SELECT r.debe, r.haber, c.nombre, c.num, c.tipo
                   FROM REGISTRO r, CUENTA c
-                  WHERE r.CUENTA_num = c.num and c.nombre like 'COSTO VENTA%'
+                  WHERE r.CUENTA_num = c.num AND c.nombre IN (";
+        for ($i = 0; $i < count($nombreCuentas)-1; $i++) {
+            $nombre = "'COSTO ".$nombreCuentas[$i];
+            $query .= "$nombre', ";
+        }
+        $nombre = "'COSTO ".$nombreCuentas[count($nombreCuentas)-1];
+        $query .= "$nombre')
                   GROUP BY c.num HAVING debe >= 0
                   ORDER BY c.nombre";
         $resultado = $this->transaccion->realizarTransaccion($query);

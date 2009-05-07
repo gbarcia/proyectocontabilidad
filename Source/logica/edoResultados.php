@@ -3,5 +3,5 @@
 
     $estado = new EstadoResultados();
 
-    $estado->mostrarEdoResultados('2009-01-01', '2009-01-17');
+    $estado->mostrarEdoResultados('2009-01-01', '2009-01-31');
 ?>

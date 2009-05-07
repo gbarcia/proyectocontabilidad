@@ -23,7 +23,6 @@
                     $manejador = new ManejadorCuenta();
 
                     $resultadoIngresos = $manejador->consultarIngresos($fechaInicio, $fechaFin);
-                    $resultadoCostosVenta = $manejador->consultarCostosVenta();
                     $resultadoEgresos = $manejador->consultarEgresos();
 
                     //$objResponse = new xajaxResponse();
@@ -46,6 +45,7 @@
                     $impresion .= '</tr>';
 
                     $sumaVentas = 0;
+                    $i = 0;
                     while ($row = mysql_fetch_array($resultadoIngresos)) {
                         $impresion .= '<tr>';
                         $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row[nombre].'</font></td>';
@@ -54,10 +54,11 @@
                         $sumaVentas += $monto;
                         $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                         $impresion .= '</tr>';
+                        $nombreCuentas[$i] = $row[nombre]; $i++;
                     }
 
                     $impresion .= '<tr>';
-                    $impresion .= '<td align = "left" colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;VENTAS</b></font></td>';
+                    $impresion .= '<td align = "left"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;VENTAS</b></font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$sumaVentas.'</font></td>';
                     $impresion .= '</tr>';
@@ -65,6 +66,8 @@
                     $impresion .= '<tr>';
                     $impresion .= '<td align = "left" colspan = "3"><i><font size = "2" face = "Garamond, Comic Sans MS, Arial"><u>COSTOS&nbsp;DE&nbsp;VENTA</u></font></i></td>';
                     $impresion .= '</tr>';
+
+                    $resultadoCostosVenta = $manejador->consultarCostosVenta($nombreCuentas);
 
                     $sumaCostosVenta = 0;
                     while ($row = mysql_fetch_array($resultadoCostosVenta)) {
@@ -77,13 +80,13 @@
                     }
 
                     $impresion .= '<tr>';
-                    $impresion .= '<td align = "left" colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;COSTOS&nbsp;DE&nbsp;VENTA</b></font></td>';
+                    $impresion .= '<td align = "left"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;COSTOS&nbsp;DE&nbsp;VENTA</b></font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">('.$sumaCostosVenta.')</font></td>';
                     $impresion .= '</tr>';
 
                     $impresion .= '<tr>';
-                    $impresion .= '<td align = "left" colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTILIDAD&nbsp;BRUTA&nbsp;EN&nbsp;VENTAS</b></font></td>';
+                    $impresion .= '<td align = "left"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTILIDAD&nbsp;BRUTA&nbsp;EN&nbsp;VENTAS</b></font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $utilidadVentas = $sumaVentas - $sumaCostosVenta;
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$utilidadVentas.'</font></td>';
@@ -104,13 +107,13 @@
                     }
 
                     $impresion .= '<tr>';
-                    $impresion .= '<td align = "left" colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;GASTOS&nbsp;DE&nbsp;VENTA&nbsp;Y&nbsp;ADMINISTRACI&Oacute;N</b></font></td>';
+                    $impresion .= '<td align = "left"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOTAL&nbsp;GASTOS&nbsp;DE&nbsp;VENTA&nbsp;Y&nbsp;ADMINISTRACI&Oacute;N</b></font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">('.$sumaGastos.')</font></td>';
                     $impresion .= '</tr>';
 
                     $impresion .= '<tr>';
-                    $impresion .= '<td align = "left" colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTILIDAD&nbsp;NETA&nbsp;EN&nbsp;OPERACIONES</b></font></td>';
+                    $impresion .= '<td align = "left"><font size = "2" face = "Garamond, Comic Sans MS, Arial"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTILIDAD&nbsp;NETA&nbsp;EN&nbsp;OPERACIONES</b></font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $utilidadOperaciones = $utilidadVentas - $sumaGastos;
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$utilidadOperaciones.'</font></td>';

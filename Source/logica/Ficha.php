@@ -71,30 +71,30 @@ and open the template in the editor.
                 $j = 0;
                 $flag = true;
                 while ($flag == true) {
-                    $impresion = '<h1 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO</b></h1><br><br>';
-                    $impresion .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "2">';
-                    $impresion .= '<thead>';
-                    $impresion .= '<tr align = "center">';
-                    $impresion .= '<th><font size = "2" face = "Garamond, Comic Sans MS, Arial">FECHA</font></th>';
-                    $impresion .= '<th><font size = "2" face = "Garamond, Comic Sans MS, Arial">DESCRIPCI&Oacute;N</font></th>';
-                    $impresion .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">ENTRADAS</font></th>';
-                    $impresion .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">SALIDAS</font></th>';
-                    $impresion .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">EXISTENCIAS</font></th>';
-                    $impresion .= '</tr>';
-                    $impresion .= '<tr align = "center">';
-                    $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
-                    $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
-                    $impresion .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
-                    $impresion .= '</tr>';
-                    $impresion .= '</thead>';
+                    $impresionEncabezado = '<h1 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO</b></h1><br><br>';
+                    $impresionEncabezado .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "2">';
+                    $impresionEncabezado .= '<thead>';
+                    $impresionEncabezado .= '<tr align = "center">';
+                    $impresionEncabezado .= '<th><font size = "2" face = "Garamond, Comic Sans MS, Arial">FECHA</font></th>';
+                    $impresionEncabezado .= '<th><font size = "2" face = "Garamond, Comic Sans MS, Arial">DESCRIPCI&Oacute;N</font></th>';
+                    $impresionEncabezado .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">ENTRADAS</font></th>';
+                    $impresionEncabezado .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">SALIDAS</font></th>';
+                    $impresionEncabezado .= '<th colspan = "3"><font size = "2" face = "Garamond, Comic Sans MS, Arial">EXISTENCIAS</font></th>';
+                    $impresionEncabezado .= '</tr>';
+                    $impresionEncabezado .= '<tr align = "center">';
+                    $impresionEncabezado .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                    $impresionEncabezado .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">CANTIDAD</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">COSTO&nbsp;UNITARIO</font></i></td>';
+                    $impresionEncabezado .= '<td><i><font size = "2" face = "Garamond, Comic Sans MS, Arial">TOTAL</font></i></td>';
+                    $impresionEncabezado .= '</tr>';
+                    $impresionEncabezado .= '</thead>';
 
                     if (($i < count($fechasCompras)) && ($j < count($fechasVentas))) {
                         if ($fechasCompras[$i] <= $fechasVentas[$j]) {
@@ -116,8 +116,6 @@ and open the template in the editor.
                         $comp = 1;
                     }
 
-/****************************** BIEN HASTA AQUÍ ******************************/
-
                     if ($comp == 1) {
                         //echo "<br>Fecha compra: ".$fechasCompras[$i]."<br>";
                         
@@ -125,11 +123,13 @@ and open the template in the editor.
                         /*
                          * Colocando valores en ENTRADAS y EXISTENCIAS
                          */
+                        $impresion = "";
                          while ($rowC = mysql_fetch_array($consultaComprasPorFecha)) {
                             $costoUnitario = ($total + ($rowC[cantidad] * $rowC[costo_unitario]))/($cantidad + $rowC[cantidad]);
                             $cantidad += $rowC[cantidad];
                             $total += ($rowC[cantidad] * $rowC[costo_unitario]);
 
+                            
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowC[fecha].'</td>';
                             echo $rowC[fecha]." ";
@@ -208,7 +208,7 @@ and open the template in the editor.
                 
                 $impresion .= '</table>';
 
-                printf($impresion);
+                echo $impresionEncabezado.$impresion;
             }
         }
     ?>
