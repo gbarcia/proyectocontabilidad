@@ -23,15 +23,15 @@
                     $manejador = new ManejadorCuenta();
 
                     $resultadoIngresos = $manejador->consultarIngresos($fechaInicio, $fechaFin);
-                    $resultadoEgresos = $manejador->consultarEgresos();
+                    $resultadoGastos = $manejador->consultarGastos();
 
                     //$objResponse = new xajaxResponse();
 
-                    $impresion = '<h1 align = "center"><b>ESTADO&nbsp;DE&nbsp;RESULTADOS</b></h1><br><br>';
+                    $impresion = '<h3 align = "center"><b>ESTADO&nbsp;DE&nbsp;RESULTADOS&nbsp;EDUGER,&nbsp;C.&nbsp;A.</b></h3><br><br>';
                     $impresion .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "0">';
                     $impresion .= '<thead>';
                     $impresion .= '<tr align = "center">';
-                    $impresion .= '<th colspan = "6"><font size = "2" face = "Garamond, Comic Sans MS, Arial">Cía UCAB, C. A.</font></th>';
+                    $impresion .= '<th colspan = "6"><font size = "2" face = "Garamond, Comic Sans MS, Arial">C&iacute;a&nbsp;EDUGER,&nbsp;C.&nbsp;A.</font></th>';
                     $impresion .= '</tr>';
                     $impresion .= '<tr>';
                     $impresion .= '<th colspan = "6"><font size = "2" face = "Garamond, Comic Sans MS, Arial">Estado&nbsp;de&nbsp;resultados&nbsp;(Bs.)</font></th>';
@@ -97,7 +97,7 @@
                     $impresion .= '</tr>';
 
                     $sumaGastos = 0;
-                    while ($row = mysql_fetch_array($resultadoEgresos)) {
+                    while ($row = mysql_fetch_array($resultadoGastos)) {
                         $impresion .= '<tr>';
                         $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row[nombre].'</font></td>';
                         $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$row[debe].'</font></td>';

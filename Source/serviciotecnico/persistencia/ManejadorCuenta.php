@@ -21,6 +21,22 @@ class ManejadorCuenta {
         return $resultado;
     }
 
+    function registrarUND ($monto) {
+        $resultado = false;
+        $query = "UPDATE REGISTRO SET haber = $monto
+                  WHERE ASIENTO_num = 12 AND CUENTA_num = 9";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+    function registrarGananciasPerdidas ($monto) {
+        $resultado = false;
+        $query = "UPDATE REGISTRO SET haber = $monto
+                  WHERE ASIENTO_num = 11 AND CUENTA_num = 8";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
     function consultarLibroMayor () {
         $resultado = false;
         $query = "SELECT SUM(r.debe) debe , SUM(r.haber) haber , c.nombre,c.num,c.tipo
@@ -43,12 +59,30 @@ class ManejadorCuenta {
         return $resultado;
     }
 
+    function consultarActivoDepreciable ($subcadena) {
+        $resultado = false;
+        $subcadena .= "%";
+        $query = "SELECT c.nombre, r.debe
+                  FROM cuenta c, registro r
+                  WHERE c.num = r.CUENTA_num AND c.nombre like '$subcadena'";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
     function consultarIngresos ($fechaInicio, $fechaFin) {
         $resultado = false;
         $query = "SELECT v.fecha, v.costo_unitario, v.cantidad, c.nombre
         FROM REGISTRO r, VENTA v, CUENTA c
         WHERE v.id = r.VENTA_id AND r.CUENTA_num = c.num
         AND v.fecha BETWEEN '$fechaInicio' AND '$fechaFin'";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+    function consultarSumaIngresos () {
+        $resultado = false;
+        $query = "SELECT SUM(r.haber) haber FROM REGISTRO r, VENTA v
+                  WHERE v.id = r.VENTA_id";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
@@ -71,7 +105,7 @@ class ManejadorCuenta {
         return $resultado;
     }
 
-    function consultarEgresos () {
+    function consultarGastos () {
         $resultado = false;
         $query = "SELECT SUM(r.debe) debe , SUM(r.haber) haber , c.nombre,c.num,c.tipo
                   FROM REGISTRO r, CUENTA c
@@ -79,6 +113,26 @@ class ManejadorCuenta {
                         and c.nombre not like 'COMPRA%' and c.nombre not like 'COSTO VENTA%'
                   GROUP BY c.num HAVING debe >= 0
                   ORDER BY c.nombre";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+    function consultarEgresos () {
+        $resultado = false;
+        $query = "SELECT SUM(r.debe) debe , SUM(r.haber) haber , c.nombre,c.num,c.tipo
+                  FROM REGISTRO r, CUENTA c
+                  WHERE r.CUENTA_num = c.num and c.tipo = 'E'
+                        and c.nombre not like 'COMPRA%'
+                  GROUP BY c.num HAVING debe >= 0
+                  ORDER BY c.nombre";
+        $resultado = $this->transaccion->realizarTransaccion($query);
+        return $resultado;
+    }
+
+    function consultarSumaEgresos () {
+        $resultado = false;
+        $query = "SELECT SUM(r.debe) debe FROM REGISTRO r, CUENTA c
+                  WHERE c.num = r.CUENTA_num AND c.tipo = 'E'";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }

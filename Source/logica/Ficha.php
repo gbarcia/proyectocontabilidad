@@ -18,13 +18,14 @@ and open the template in the editor.
 
             private $manejadorHome;
             private $manejadorProducto;
+            private $inventarioFinal;
 
             function __construct(){
                 $this->manejadorHome = new ManejadorHome();
                 $this->manejadorProducto = new ManejadorProducto();
             }
 
-            function mostrarFicha($nombreProducto) {
+            function mostrarFicha($nombreProducto, $flagImpresion) {
                 $cantidad = 0;        //Aquí van
                 $costoUnitario = 0;   //los valores del
                 $total = 0;           //inventario inicial
@@ -46,32 +47,11 @@ and open the template in the editor.
                     $fechasVentas[$j] = $rowVentas[fecha]; $j++;
                 }
 
-                /*for ($j = 0; $j < count($fechasVentas); $j++) {
-                    $consultaVentasPorFecha = $this->manejadorHome->obtenerTodasLasVentasPorFecha($fechasVentas[$j]);
-
-                    while ($rowV = mysql_fetch_array($consultaVentasPorFecha)) {
-                        echo "Fecha venta: ".$rowV[fecha]." ";
-                        echo "Costo unitario: ".$rowV[costo_unitario]." ";
-                        echo "Cantidad: ".$rowV[cantidad]."<br>";
-                    }
-                }
-
-                echo "<br>";
-                for ($i = 0; $i < count($fechasCompras); $i++) {
-                    $consultaComprasPorFecha = $this->manejadorHome->obtenerTodasLasComprasPorFecha($fechasCompras[$i]);
-
-                    while ($rowC = mysql_fetch_array($consultaComprasPorFecha)) {
-                        echo "Fecha compra: ".$rowC[fecha]." ";
-                        echo "Costo unitario: ".$rowC[costo_unitario]." ";
-                        echo "Cantidad: ".$rowC[cantidad]."<br>";
-                    }
-                }*/
-
                 $i = 0;
                 $j = 0;
                 $flag = true;
                 while ($flag == true) {
-                    $impresionEncabezado = '<h1 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO</b></h1><br><br>';
+                    $impresionEncabezado = '<h3 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO '.$nombreProducto.'</b></h3><br><br>';
                     $impresionEncabezado .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "2">';
                     $impresionEncabezado .= '<thead>';
                     $impresionEncabezado .= '<tr align = "center">';
@@ -117,43 +97,31 @@ and open the template in the editor.
                     }
 
                     if ($comp == 1) {
-                        //echo "<br>Fecha compra: ".$fechasCompras[$i]."<br>";
-                        
                         $consultaComprasPorFecha = $this->manejadorHome->obtenerTodasLasComprasPorFecha($fechasCompras[$i]);
                         /*
                          * Colocando valores en ENTRADAS y EXISTENCIAS
                          */
-                        $impresion = "";
-                         while ($rowC = mysql_fetch_array($consultaComprasPorFecha)) {
+                        while ($rowC = mysql_fetch_array($consultaComprasPorFecha)) {
                             $costoUnitario = ($total + ($rowC[cantidad] * $rowC[costo_unitario]))/($cantidad + $rowC[cantidad]);
                             $cantidad += $rowC[cantidad];
                             $total += ($rowC[cantidad] * $rowC[costo_unitario]);
-
-                            
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowC[fecha].'</td>';
-                            echo $rowC[fecha]." ";
                             $impresion .= '<td>compra</td>';
-                            echo "compra ";
                             $impresion .= '<td>'.$rowC[cantidad].'</td>';
-                            echo $rowC[cantidad]." ";
                             $cu = round($rowC[costo_unitario]*100)/100;
                             $impresion .= '<td>'.$cu.'</td>';
-                            echo $cu." ";
                             $tot = round($rowC[cantidad] * $rowC[costo_unitario]);
                             $impresion .= '<td>'.$tot.'</td>';
-                            echo $tot." ";
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$cantidad.'</td>';
-                            echo $cantidad." ";
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
-                            echo $cUnitario." ";
                             $redTotal = round($total);
                             $impresion .= '<td>'.$redTotal.'</td>';
-                            echo $redTotal."<br><br>";
+                            $this->setInventarioFinal($redTotal);
                             $impresion .= '</tr>';
                          }
 
@@ -161,8 +129,6 @@ and open the template in the editor.
                          
                     }
                     else if ($comp == 0) {
-                        //echo "<br>Fecha venta: ".$fechasVentas[$j]."<br>";
-                        
                         $consultaVentasPorFecha = $this->manejadorHome->obtenerTodasLasVentasPorFecha($fechasVentas[$j]);
                         /*
                          * Colocando valores en SALIDAS y EXISTENCIAS
@@ -173,27 +139,20 @@ and open the template in the editor.
 
                             $impresion .= '<tr align = "center">';
                             $impresion .= '<td>'.$rowV[fecha].'</td>';
-                            echo $rowV[fecha]." ";
                             $impresion .= '<td>venta</td>';
-                            echo "venta ";
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                             $impresion .= '<td>'.$rowV[cantidad].'</td>';
-                            echo $rowV[cantidad]." ";
                             $cUnitario = round($costoUnitario*100)/100;
                             $impresion .= '<td>'.$cUnitario.'</td>';
-                            echo $cUnitario." ";
                             $tot = round($rowV[cantidad] * $costoUnitario);
                             $impresion .= '<td>'.$tot.'</td>';
-                            echo $tot." ";
                             $impresion .= '<td>'.$cantidad.'</td>';
-                            echo $cantidad." ";
                             $impresion .= '<td>'.$cUnitario.'</td>';
-                            echo $cUnitario." ";
                             $redTotal = round($total);
                             $impresion .= '<td>'.$redTotal.'</td>';
-                            echo $redTotal."<br><br>";
+                            $this->setInventarioFinal($redTotal);
                             $impresion .= '</tr>';
                         }
 
@@ -201,14 +160,25 @@ and open the template in the editor.
                         
                     }
                     else if ($comp == -1) {
-                        echo "No hay más compras ni ventas";
                         $flag = false;
                     }
                 }
                 
                 $impresion .= '</table>';
 
-                echo $impresionEncabezado.$impresion;
+                if ($flagImpresion == true) {
+                    echo $impresionEncabezado.$impresion;
+                }
+
+                echo "<br><br>Inventario final: ".$this->getInventarioFinal();
+            }
+
+            function setInventarioFinal($inventario){
+                $this->inventarioFinal = $inventario;
+            }
+
+            function getInventarioFinal(){
+                return $this->inventarioFinal;
             }
         }
     ?>
