@@ -115,25 +115,19 @@
                             $ultimoTipoCuenta = 'P';
                         }
                     }
-
+                    $impresion .= '<tr align = "center">';
                     $resolucion = new CargaInterfaz();
-                                                                                                                                                                                                                        $coordX = $sumaActivos; $coordY = $sumaPasivos;
-                    $coordX = $resolucion->verificacionResolucionPantalla($coordX, $coordY);
-                    $coordY = $resolucion->verificacionResolucionPantalla($coordX, $coordY);                                                                                                                                  $sumaActivos = $coordX; $sumaPasivos = $coordY;
-
-                    $impresion .= '<tr>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">Total&nbsp;activos</font></td>';
+                    $coordX = $resolucion->verificacionResolucionPantalla($coordX, $coordY);                                                                                                                                                                                                    $coordX = $sumaActivos; $coordY = $sumaPasivos;
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+                    $coordY = $resolucion->verificacionResolucionPantalla($coordX, $coordY);                                                                                                                                                                                                    $sumaActivos = $coordX; $sumaPasivos = $coordY;
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$sumaActivos.'</font></td>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">Total&nbsp;pasivos</font></td>';
                     $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$sumaPasivos.'</font></td>';
                     $impresion .= '</tr>';
-
                     $impresion .= '</table>';
-
                     printf($impresion);
-
                     //$objResponse->addAssign("Balance General", "innerHTML", $impresion);
                 }
             }
