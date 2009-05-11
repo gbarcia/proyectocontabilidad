@@ -39,7 +39,7 @@
                     //$objResponse = new xajaxResponse();
 
                     $impresion = '<h3 align = "center"><b>BALANCE&nbsp;GENERAL&nbsp;EDUGER,&nbsp;C.&nbsp;A.</b></h3><br><br>';
-                    $impresion .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "0">';
+                    $impresion .= '<table align = "center" border = "2" cellpadding = "4" cellspacing = "2">';
                     $impresion .= '<thead>';
                     $impresion .= '<tr align = "center">';
                     $impresion .= '<th colspan = "6"><font size = "2" face = "Garamond, Comic Sans MS, Arial">C&iacute;a&nbsp;EDUGER,&nbsp;C.&nbsp;A.</font></th>';

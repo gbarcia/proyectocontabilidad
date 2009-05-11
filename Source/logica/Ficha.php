@@ -52,7 +52,7 @@ and open the template in the editor.
                 $flag = true;
                 while ($flag == true) {
                     $impresionEncabezado = '<h3 align = "center"><b>FICHA&nbsp;DE&nbsp;INVENTARIO '.$nombreProducto.'</b></h3><br><br>';
-                    $impresionEncabezado .= '<table align = "center" border = "2" cellpadding = "2" cellspacing = "2">';
+                    $impresionEncabezado .= '<table align = "center" border = "2" cellpadding = "4" cellspacing = "2">';
                     $impresionEncabezado .= '<thead>';
                     $impresionEncabezado .= '<tr align = "center">';
                     $impresionEncabezado .= '<th><font size = "2" face = "Garamond, Comic Sans MS, Arial">FECHA</font></th>';
@@ -169,8 +169,6 @@ and open the template in the editor.
                 if ($flagImpresion == true) {
                     echo $impresionEncabezado.$impresion;
                 }
-
-                echo "<br><br>Inventario final: ".$this->getInventarioFinal();
             }
 
             function setInventarioFinal($inventario){

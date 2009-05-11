@@ -132,7 +132,7 @@ class ManejadorCuenta {
     function consultarSumaEgresos () {
         $resultado = false;
         $query = "SELECT SUM(r.debe) debe FROM REGISTRO r, CUENTA c
-                  WHERE c.num = r.CUENTA_num AND c.tipo = 'E'";
+                  WHERE c.num = r.CUENTA_num AND c.tipo = 'E' AND c.nombre NOT LIKE 'COMPRA%'";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }
