@@ -8,8 +8,6 @@
             require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
             require_once("../serviciotecnico/persistencia/ManejadorCuenta.php");
             require_once("../presentacion/SpryAssets/InicializacionProcesosConcurrentesInterfaz.php");
-            /*require_once("../serviciotecnico/persistencia/ManejadorHome.php");
-            require_once("../serviciotecnico/utilidades/xajax/xajaxResponse.inc.php");*/
 
             class Balance {
 
@@ -35,8 +33,6 @@
 
                     $manejador->registrarUND($und);
                     $manejador->registrarGananciasPerdidas($und);
-
-                    //$objResponse = new xajaxResponse();
 
                     $impresion = '<h3 align = "center"><b>BALANCE&nbsp;GENERAL&nbsp;EDUGER,&nbsp;C.&nbsp;A.</b></h3><br><br>';
                     $impresion .= '<table align = "center" border = "2" cellpadding = "4" cellspacing = "2">';
@@ -127,8 +123,8 @@
                     $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$sumaPasivos.'</font></td>';
                     $impresion .= '</tr>';
                     $impresion .= '</table>';
-                    printf($impresion);
-                    //$objResponse->addAssign("Balance General", "innerHTML", $impresion);
+
+                    return $impresion;
                 }
             }
         ?>    

@@ -53,7 +53,7 @@
 
                 $impresion .= '</table>';
 
-                printf($impresion);
+                return $impresion;
             }
         }
     ?>

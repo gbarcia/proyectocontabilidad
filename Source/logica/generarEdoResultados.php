@@ -7,9 +7,7 @@
         <?php
             require_once("../serviciotecnico/utilidades/TransaccionBD.class.php");
             require_once("../serviciotecnico/persistencia/ManejadorCuenta.php");
-            /*require_once("../serviciotecnico/persistencia/ManejadorHome.php");
-            require_once("../serviciotecnico/utilidades/xajax/xajaxResponse.inc.php");*/
-
+            
             class EstadoResultados {
 
                 private $transaccion;
@@ -24,8 +22,6 @@
 
                     $resultadoIngresos = $manejador->consultarIngresos($fechaInicio, $fechaFin);
                     $resultadoGastos = $manejador->consultarGastos();
-
-                    //$objResponse = new xajaxResponse();
 
                     $impresion = '<h3 align = "center"><b>ESTADO&nbsp;DE&nbsp;RESULTADOS&nbsp;EDUGER,&nbsp;C.&nbsp;A.</b></h3><br><br>';
                     $impresion .= '<table align = "center" border = "2" cellpadding = "4" cellspacing = "2">';
@@ -121,9 +117,7 @@
 
                     $impresion .= '</table>';
 
-                    printf($impresion);
-
-                    //$objResponse->addAssign("Balance General", "innerHTML", $impresion);
+                    return $impresion;
                 }
             }
         ?>

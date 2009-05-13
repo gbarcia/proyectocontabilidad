@@ -169,6 +169,10 @@ and open the template in the editor.
                 if ($flagImpresion == true) {
                     echo $impresionEncabezado.$impresion;
                 }
+                
+                $resultadoFicha = $impresionEncabezado.$impresion;
+
+                return $resultadoFicha;
             }
 
             function setInventarioFinal($inventario){
