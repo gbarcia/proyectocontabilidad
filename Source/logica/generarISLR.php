@@ -26,7 +26,7 @@
                 $utilidadDespuesISLR = round($utilidadesISLR - $islrPorPagar);
 
                 $impresion = '<h3 align = "center"><b>IMPUESTO&nbsp;SOBRE&nbsp;LA&nbsp;RENTA&nbsp;EDUGER,&nbsp;C.&nbsp;A.</b></h3><br><br>';
-                $impresion .= '<table align = "center" border = "2" cellpadding = "4" cellspacing = "2">';
+                $impresion .= '<table class= "scrollTable" align = "center" border = "0" cellpadding = "4" cellspacing = "2">';
                 $impresion .= '<thead>';
                 $impresion .= '<tr align = "center">';
                 $impresion .= '<th colspan = "5"><font size = "2" face = "Garamond, Comic Sans MS, Arial">Impuesto&nbsp;sobre&nbsp;la&nbsp;Renta&nbsp;por&nbsp;pagar</font></th>';
@@ -53,7 +53,7 @@
 
                 $impresion .= '</table>';
 
-                return $impresion;
+                echo $impresion;
             }
         }
     ?>
