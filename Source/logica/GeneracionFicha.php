@@ -3,5 +3,5 @@
 
     $ficha = new Inventario();
 
-    $ficha->mostrarFicha('MOUSE LASER', true);
+    $ficha->mostrarFicha('MOUSE LASER', false);
 ?>
