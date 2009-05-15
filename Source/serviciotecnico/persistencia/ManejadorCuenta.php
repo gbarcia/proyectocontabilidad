@@ -71,10 +71,12 @@ class ManejadorCuenta {
 
     function consultarIngresos ($fechaInicio, $fechaFin) {
         $resultado = false;
-        $query = "SELECT v.fecha, v.costo_unitario, v.cantidad, c.nombre
-        FROM REGISTRO r, VENTA v, CUENTA c
-        WHERE v.id = r.VENTA_id AND r.CUENTA_num = c.num
-        AND v.fecha BETWEEN '$fechaInicio' AND '$fechaFin'";
+        $query = "SELECT c.nombre, sum(v.cantidad * v.costo_unitario) total,v.fecha,
+                  v.costo_unitario, v.cantidad
+                  FROM REGISTRO r, VENTA v, CUENTA c
+                  WHERE v.id = r.VENTA_id AND r.CUENTA_num = c.num
+                  AND v.fecha BETWEEN '$fechaInicio' AND '$fechaFin'
+                  GROUP BY c.nombre";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }

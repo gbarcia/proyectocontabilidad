@@ -32,7 +32,7 @@
 
             $venta = new TransaccionBDclass();
 
-            $venta->realizarTransaccion($query);
+            return $venta->realizarTransaccionInsertId($query);
         }
     }
 ?>

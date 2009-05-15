@@ -396,20 +396,20 @@ function procesarAsiento ($datos) {
         if ($datos[producto] == 1) $cuentaEgreso = 12;
         else if ($datos[producto] == 2) $cuentaEgreso = 13;
         $montoTotal = $datos[cantidad] * $datos[costo];
-        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, 0, $montoTotal, 'C');
-        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaEgreso, $montoTotal,0, 'C');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, 0, $montoTotal, 'C','NULL');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaEgreso, $montoTotal,0, 'C','NULL');
         $objResponse->addAlert("Compra registrada con exito");
     }
     else if ($datos[tipo] == 1) {
         $controlVenta = new Insercion();
-        $controlVenta->realizarVenta($datos[cliente], $datos[producto], $datos[fecha], $datos[costo], $datos[cantidad]);
+        $idVenta = $controlVenta->realizarVenta($datos[cliente], $datos[producto], $datos[fecha], $datos[costo], $datos[cantidad]);
         $controlAsiento = new ManejadorAsiento();
         $numAsiento = $controlAsiento->agregarAsiento($datos[fecha]);
         if ($datos[producto] == 1) $cuentaIngreso = 10;
         else if ($datos[producto] == 2) $cuentaIngreso = 11;
         $montoTotal = $datos[cantidad] * $datos[costo];
-        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, $montoTotal,0 , 'V');
-        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaIngreso,0,$montoTotal, 'V');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, 1, $montoTotal,0 , 'V','NULL');
+        $resultado = $controlAsiento->agregarRegistro($numAsiento, $cuentaIngreso,0,$montoTotal, 'V',$idVenta);
         $objResponse->addAlert("Venta registrada con exito");
     }
     else if ($datos[tipo] == 2) {
@@ -421,63 +421,63 @@ function procesarAsiento ($datos) {
              $haber = $datos[h1];
             if ($datos[d1] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta1], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta1], $debe,$haber , 'O','NULL');
         }
         if ($datos[dos] == true && $datos[uno] == true) {
              $debe = $datos[d2];
              $haber = $datos[h2];
              if ($datos[d2] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta2], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta2], $debe,$haber , 'O','NULL');
         }
         if ($datos[tres] == true && $datos[tres] == true) {
              $debe = $datos[d3];
              $haber = $datos[h3];
              if ($datos[d3] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta3], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta3], $debe,$haber , 'O','NULL');
         }
         if ($datos[cuatro] == true && $datos[cuatro] == true) {
              $debe = $datos[d4];
              $haber = $datos[h4];
              if ($datos[d4] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta4], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta4], $debe,$haber , 'O','NULL');
         }
         if ($datos[cinco] == true && $datos[cinco] == true) {
              $debe = $datos[d5];
              $haber = $datos[h5];
              if ($datos[d5] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta5], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta5], $debe,$haber , 'O','NULL');
         }
         if ($datos[seis] == true && $datos[seis] == true) {
              $debe = $datos[d6];
              $haber = $datos[h6];
              if ($datos[d6] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta6], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta6], $debe,$haber , 'O','NULL');
         }
         if ($datos[siete] == true && $datos[siete] == true) {
              $debe = $datos[d7];
              $haber = $datos[h7];
              if ($datos[d7] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta7], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta7], $debe,$haber , 'O','NULL');
         }
         if ($datos[ocho] == true && $datos[ocho] == true) {
              $debe = $datos[d8];
              $haber = $datos[h8];
              if ($datos[d8] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta8], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta8], $debe,$haber , 'O','NULL');
         }
         if ($datos[nueve] == true && $datos[nueve] == true) {
              $debe = $datos[d9];
              $haber = $datos[h9];
              if ($datos[d9] == '') $debe = 0;
             else $haber = 0;
-            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta9], $debe,$haber , 'O');
+            $resultado = $controlAsiento->agregarRegistro($numAsiento, $datos[cuenta9], $debe,$haber , 'O','NULL');
         }
         $objResponse->addAlert("Asiento registrado con exito");
     }

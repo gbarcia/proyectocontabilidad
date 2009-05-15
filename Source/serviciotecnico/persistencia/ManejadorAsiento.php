@@ -47,10 +47,10 @@ class ManejadorAsiento {
         return $resultado;
     }
 
-    function agregarRegistro ($idAsiento, $numCuenta,$debe,$haber,$tipo) {
+    function agregarRegistro ($idAsiento, $numCuenta,$debe,$haber,$tipo,$idVenta) {
         $resultado = false;
         $query = "INSERT INTO REGISTRO VALUES ($idAsiento,$numCuenta,$debe,$haber,
-                  NULL,NULL,NULL,NULL,NULL,NULL,'".$tipo."')";
+                  $idVenta,NULL,NULL,NULL,NULL,NULL,'".$tipo."')";
         $resultado = $this->transaccion->realizarTransaccion($query);
         return $resultado;
     }

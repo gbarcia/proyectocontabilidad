@@ -39,7 +39,7 @@ class EstadoResultados {
         while ($row = mysql_fetch_array($resultadoIngresos)) {
             $impresion .= '<tr>';
             $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row[nombre].'</font></td>';
-            $monto = $row[costo_unitario] * $row[cantidad];
+            $monto = $row[total];
             $impresion .= '<td><font size = "2" face = "Garamond, Comic Sans MS, Arial">'.$monto.'</font></td>';
             $sumaVentas += $monto;
             $impresion .= '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>';
