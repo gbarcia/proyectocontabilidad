@@ -1,0 +1,1 @@
+<?php $link = mysql_connect("localhost", "root","admin") or die ("Error en la conexion");mysql_select_db("contabilidadGrupo2", $link) or die ("Error al acceder a la base de datos");?>
