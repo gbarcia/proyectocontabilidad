@@ -1,0 +1,1 @@
+Proyecto realizado para la materia de Contabilidad de la Universidad Católica Andrés Bello. La herramienta maneja inventarios, libro de diario, libro mayor y soporta las transacciones financieras dejando un registro que presenta informes de el estado de resultados, el flujo de caja y el Balance General.
